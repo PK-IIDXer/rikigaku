@@ -1,0 +1,23 @@
+\documentclass[dvipdfmx, 11pt, oneside, openany]{jsbook}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{problem}[theorem]{問題}
+\newtheorem{example}[theorem]{例題}
+\renewcommand{\proofname}{\textbf{証明}}
+
+\setlength{\textwidth}{\fullwidth}
+
+\begin{document}
+  \include{chap1}
+  \include{chap2}
+  \include{chap3}
+  \include{chap4}
+\end{document}

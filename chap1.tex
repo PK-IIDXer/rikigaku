@@ -1,0 +1,288 @@
+\chapter{質点の運動・速さ・加速度}
+
+力学とは、身近な物体の運動から天体の運行までを、少ない前提から統一的に説明しようとする学問です。
+
+\section{質点の運動}
+
+デカルト以降、僕たちはこの世界が三次元だと理解しています。
+どの物体も、どこかに基準を決めれば、3つの実数の組でその位置を絶対的に決めることができるとしています。
+数学的には、物体は
+\[
+  \mathbb{R}^3=\{(x,y,z)\mid x,y,z\in\mathbb{R}\}
+\]
+の元によって表すことができます。
+
+物体を強く押したり、持ち上げて手を放すなどすると、時間経過とともにその位置を変えます。
+この発想で、質点の運動というものを以下のように定義できます。
+\begin{definition}
+  $I:=[a,b]\subset\mathbb{R}$を閉区間とする。
+  このとき、連続写像$\gamma:I\to\mathbb{R}^3$を、閉区間$I$における\textbf{質点の運動}といい、$(I,\gamma)$で表す。
+\end{definition}
+
+もちろん「時間って何？」とか「空間って本当に3次元なの？」という疑問はありつつ、ここでは立ち入りません。
+あくまで「こういうモデルで話を進めてみましょうよ」という立場でやらせてもらいます。
+
+また、質点の運動が明らかに二次元平面や一次元の直線に制限される場合、最初から$\gamma$の値域を$\mathbb{R}^2$あるいは$\mathbb{R}$に取っておくことがあります。
+
+
+
+\section{質点の速さ}
+
+車にはスピードメーターが搭載されていて、これを見ればおよそ何時間後に何km進むかが分かります。
+例えば40km/hという数値を維持すれば、1時間後には40km進んでいます。
+
+逆に考えると、「移動距離」と「その距離を移動するのにかかった時間」という量は測定しやすいです。
+これの商を「速さ」として定義しておいて、速さを予測できる体系が作れれば実用上便利そうです。
+僕たちの質点の定義から、この「移動距離の変化の割合」として速さを次のように定義できます。
+\begin{definition}
+  $(I,\gamma)$を閉区間$I$上の質点の運動とする。
+  $x,y\in I$、$x\neq y$とする。
+  このとき、以下の量を時刻$x$から$y$への質点の\textbf{平均の速さ}という。
+  \[
+    \frac{\gamma(y)-\gamma(x)}{y-x}
+  \]
+\end{definition}
+
+しかし、速さを定義するために二つの実数$x,y$が必要というのは面倒です。
+特に、日常的な感覚として「一瞬の間にも速さはある」ような気がします。
+ここにおいて、$y$を\textbf{限りなく$x$に近づけた時の速さ}、つまり極限を知りたいという動機が生まれます。
+
+しかし極限
+\[
+  \lim_{y\to x}\frac{\gamma(y)-\gamma(x)}{y-x}
+\]
+が存在するかどうかは非自明です。
+次のざっくりした例で、極限が存在しない可能性を垣間見てみましょう。
+
+\begin{example}
+  1次元の質点の運動
+  \[
+    \gamma(t):=|t|
+  \]
+  を考える。このとき、$x=0$とすると
+  \begin{align*}
+    \frac{\gamma(y)-\gamma(0)}{y-0}&=\frac{|y|}{y}\\
+    &=\begin{cases}
+      1 & y>0\\
+      -1 & y<0
+    \end{cases}
+  \end{align*}
+  ゆえに右極限は$1$で、左極限は$-1$となり左右の極限が異なる。
+\end{example}
+ここで「右極限」および「左極限」という言葉が出てきましたので、定義を述べておきましょう。
+といっても、高校数学で学習済みのものを$\varepsilon-\delta$で厳密に書き直したにすぎません。
+\begin{definition}
+  $f$を関数とする。
+  $a\in\mathbb{R}$における$f$の右極限が$L$であるとは、任意の$\varepsilon>0$に対して、ある$\delta>0$が存在して、任意の$x\in I$に対して
+  \[0<x-a<\delta\Rightarrow|f(x)-L|<\varepsilon\]
+  を満たす時をいう。
+  この様子を、以下の記号であらわす
+  \[
+    \lim_{x\to a+0}f(x)=L
+  \]
+
+  $a\in\mathbb{R}$における$f$の左極限が$L$であるとは、任意の$\varepsilon>0$に対して、ある$\delta>0$が存在して、任意の$x\in I$に対して
+  \[-\delta<x-a<0\Rightarrow|f(x)-L|<\varepsilon\]
+  を満たす時をいう。
+  この様子を、以下の記号であらわす
+  \[
+    \lim_{x\to a-0}f(x)=L
+  \]
+\end{definition}
+また、上の例題では次の結果を認めていたので証明しましょう。
+\begin{theorem}
+  実数$a$を含むある区間で定義された関数$f$について、$\lim_{x\to a}f(x)$が存在するための必要十分条件は、$x=a$における左右極限が存在して一致することである。
+\end{theorem}
+\begin{proof}
+  (条件が必要であること)仮定から、ある実数$L$が存在して、任意の$\varepsilon>0$に対してある$\delta>0$をうまくとれば、
+  \[
+    0<|x-a|<\delta\Rightarrow|f(x)-L|<\varepsilon
+  \]
+  が成り立つ。$0<|x-a|<\delta$は$0<x-a<\delta$かつ$-\delta<x-a<0$と同値であるから、すなわち
+  \begin{align*}
+    0<x-a<\delta&\Rightarrow|f(x)-L|<\varepsilon\\
+    -\delta<x-a<0&\Rightarrow|f(x)-L|<\varepsilon
+  \end{align*}
+  ゆえに$f$の左右極限が存在して、それらは$L$で一致する。
+
+  (条件が十分であること)仮定から、ある実数$L$が存在して、任意の$\varepsilon>0$に対して、$\delta_1,\delta_2>0$が存在して、
+  \begin{align*}
+    0<x-a<\delta_1&\Rightarrow|f(x)-L|<\varepsilon\\
+    -\delta_2<x-a<0&\Rightarrow|f(x)-L|<\varepsilon
+  \end{align*}
+  が成り立つ。
+  ここで$\delta:=\min\{\delta_1,\delta_2\}>0$とおけば、
+  \begin{align*}
+    0<|x-a|<\delta&\Leftrightarrow-\delta<x-a<\delta,x-a\neq0\\
+    &\Leftrightarrow-\delta<x-a<0 \text{ or } 0<x-a<\delta
+  \end{align*}
+  ところが$\delta$の定義から$-\delta_2<-\delta$、$\delta<\delta_1$が成り立つから、
+  \begin{align*}
+    0<x-a<\delta&\Rightarrow0<x-a<\delta_1\Rightarrow|f(x)-L|<\varepsilon\\
+    -\delta<x-a<0&\Rightarrow-\delta_2<x-a<0\Rightarrow|f(x)-L|<\varepsilon
+  \end{align*}
+  いずれにしても、$0<|x-a|<\delta$ならば$|f(x)-L|<\varepsilon$が示せた。
+\end{proof}
+
+左右からの極限を考えるのが煩わしいので、関数の定義域を拡張して考えることもあります。
+うれしいことに、次のような言い換えが存在します。
+\begin{theorem}
+  $I=[a,b]$を閉区間、$f:I\to\mathbb{R}$を連続写像とする。
+  このとき、極限
+  \[
+    \lim_{x\to a+0}\frac{f(x)-f(a)}{x-a}
+  \]
+  が存在することと、以下の条件が満たされることは必要十分である。
+  点$a$を含むある開区間$I_a$と、関数$g:I_a\to\mathbb{R}$が存在して、
+  \begin{itemize}
+    \item $f|_{I\cap I_a}=g|_{I\cap I_a}$
+    \item $g$は$a\in I_a$で微分可能
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  条件が十分であることは明らかなので、必要であることを証明する。
+  仮定より、極限
+  \[
+    \lim_{x\to a+0}\frac{f(x)-f(a)}{x-a}=L
+  \]
+  が存在する。
+  ここで、$g:(-\infty,b]$を
+  \[
+    g(x):=\begin{cases}
+      f(x) & (x\in (a,b))\\
+      f(a)+L\cdot(x-a) & (x\leq a)
+    \end{cases}
+  \]
+  で定義すると、$g$は$(-\infty,b)$上で連続である($\because$ 貼り合わせの補題)。
+  また$a$で微分可能であることが次のように証明できる。
+  $(f(x)-f(a))/(x-a)$の右極限が存在することから、任意の$\varepsilon>0$に対して、ある$\delta>0$が存在して、
+  \[
+    0<x-a<\delta\Rightarrow\left|\frac{f(x)-f(a)}{x-a}-L\right|<\varepsilon
+  \]
+  ゆえに$0<|x-a|<\delta$のとき、
+  \begin{align*}
+    &\left|\frac{g(x)-g(a)}{x-a}-L\right|\\
+    =&\left|\frac{g(x)-f(a)}{x-a}-L\right|\\
+    =&\begin{cases}
+      \left|\frac{f(x)-f(a)}{x-a}-L\right| & (x>a)\\
+      \left|\frac{L\cdot(x-a)}{x-a}-L\right| & (x<a)
+    \end{cases}\\
+    =&\begin{cases}
+      \left|\frac{f(x)-f(a)}{x-a}-L\right| & (x>a)\\
+      0 & (x<a)
+    \end{cases}\\
+    <&0
+  \end{align*}
+\end{proof}
+
+これで、どんな区間であっても、その区間上の関数が微分可能かどうかを気楽に論じることができます。
+\begin{definition}
+  $I$を区間、$f:I\to\mathbb{R}$を(連続とは限らない)関数、$x\in I$とする。
+  このとき、極限
+  \[
+    f'(x):=\lim_{y\to x}\frac{f(x)-f(y)}{x-y}
+  \]
+  が存在するとき、$f'(x)$を$f$の$x$における\textbf{微分係数}、あるいは単に\textbf{微分}という。
+\end{definition}
+
+微分係数の書き方には複数あり、
+\begin{align*}
+  \dot{f}(x)=f'(x)=\frac{df}{dx}=D_xf
+\end{align*}
+などがあります。
+物理でよく使うのは
+\[
+  \dot{f}(x)
+\]
+で、数学の、とくに一変数関数の微分は
+\[
+  f'(x)
+\]
+と書くことが多い気がします。
+しかし、「どの変数で微分してるか」というのをはっきりさせたいときは
+\[
+  \frac{df}{dx}
+\]
+を使うのが良い気がします。
+じゃあ$D_xf$はいつ使うかというと、関数解析とか代数解析という分野でよく見かける気がします。
+結構その時の気分で書き分けたりしますが、できれば慣れてください。
+
+…さて、一点のみならず、任意の点で微分可能な質点というのは行儀が良さそうです。
+\begin{definition}
+  $I$を区間、$f:I\to\mathbb{R}$を(連続とは限らない)関数とする。
+  \textbf{$I$上微分可能である}とは、任意の$x\in I$に対して、微分係数$f'(x)$が存在する時を言う。
+  このとき、関数
+  \[
+    f':I\to\mathbb{R}
+  \]
+  を、$f$の\textbf{導関数}、あるいは単に\textbf{微分}という。
+\end{definition}
+
+話がそれましたが、極限が存在するような運動に限って、いわば「瞬間の速さ」を定義することができます。
+\begin{definition}
+  $(I,\gamma)$を質点の運動、$t\in I$とする。
+  このとき、極限
+  \[
+    \dot\gamma(t):=\lim_{y\to t}\frac{\gamma(t)-\gamma(y)}{t-y}
+  \]
+  が存在するとき、$\gamma$は$t$で\textbf{微分可能}であるといい、極限の値$\dot\gamma(t)$を\textbf{微分係数}、あるいは単に\textbf{微分}という。
+  あるいは$\dot\gamma(x)$を質点の運動$\gamma$の時刻$x$における\textbf{速さ}という。
+\end{definition}
+
+\begin{definition}
+  $(I,\gamma)$を質点の運動とする。
+  任意の$t\in I$に対して微分係数$\dot\gamma(t)$が存在するとき、$\gamma$は$I$で\textbf{微分可能}であるといい、写像
+  \[
+    \dot\gamma:I\to\mathbb{R}
+  \]
+  を$\gamma$の\textbf{導関数}、あるいは単に\textbf{微分}という。
+\end{definition}
+
+
+
+\section{質点の加速度}
+
+ボールを持ち上げて、高いところから手を離すと落ちます。
+ただ落ちるだけじゃなく、だんだん速さが速くなっていきます。
+他にも例えば、ボールに紐をつけてブンブン回すと、速さの絶対値自体は時間変化しなくても、向きがグリグリ変わっています。
+そういった「速さの変化量」も実は目に見える量です。
+今回はいきなり微分で定義しましょう。
+\begin{definition}
+  $(I,\gamma)$を質点の運動、$x\in I$とする。
+  また、$\gamma$は$x$のある開近傍で常に微分可能であるとする。
+  このとき、極限
+  \[
+    \ddot\gamma(x):=\lim_{y\to x}\frac{\dot\gamma(y)-\dot\gamma(x)}{y-x}
+  \]
+  が存在するとき、$\gamma$は$x$で\textbf{二階微分可能}であるという。
+  $\ddot\gamma(x)$を質点の運動$\gamma$の時刻$x$における\textbf{加速度}という。
+\end{definition}
+
+\begin{definition}
+  $(I,\gamma)$を質点の運動とする。
+  任意の$x\in I$に対して、極限
+  \[
+    \ddot\gamma(x):=\lim_{y\to x}\frac{\dot\gamma(y)-\dot\gamma(x)}{y-x}
+  \]
+  が存在するとき、$\gamma$は$I$で\textbf{二階微分可能}であるといい、写像
+  \[
+    \ddot\gamma:I\to\mathbb{R}^3
+  \]
+  を$\gamma$の\textbf{二階導関数}あるいは単に\textbf{二階微分}という。
+\end{definition}
+
+今まで質点$\gamma$は閉区間$I$から$\mathbb{R}^3$への連続写像として定義していましたが、ここにきて$\gamma$は二階微分可能であるして再定義しましょう。
+\begin{definition}
+  $I:=[a,b]\subset\mathbb{R}$を閉区間とする。
+  このとき、連続写像$\gamma:I\to\mathbb{R}^3$が$I$上で二階微分可能であるとき、区間$I$における\textbf{質点の運動}といい、$(I,\gamma)$で表す。
+\end{definition}
+
+
+
+
+
+
+
+
+
+

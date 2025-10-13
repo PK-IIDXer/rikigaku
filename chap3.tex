@@ -1,0 +1,70 @@
+\chapter{微分の基礎}
+
+せっかく微分がでてきたので、数学的にしっかり基礎づけしていきましょう。
+
+
+
+\section{定義のおさらい}
+
+\begin{definition}
+  $I$を区間、$f:I\to\mathbb{R}$を(連続とは限らない)関数、$x\in I$とする。
+  このとき、極限
+  \[
+    f'(x):=\lim_{y\to x}\frac{f(x)-f(y)}{x-y}
+  \]
+  が存在するとき、$f'(x)$を$f$の$x$における\textbf{微分係数}、あるいは単に\textbf{微分}という。
+\end{definition}
+
+\begin{definition}
+  $I$を区間、$f:I\to\mathbb{R}$を(連続とは限らない)関数とする。
+  \textbf{$I$上微分可能である}とは、任意の$x\in I$に対して、微分係数$f'(x)$が存在する時を言う。
+  このとき、関数
+  \[
+    f':I\to\mathbb{R}
+  \]
+  を、$f$の\textbf{導関数}、あるいは単に\textbf{微分}という。
+\end{definition}
+
+$y\to x$を、$y=x+h$の変数変換によって
+\[
+  f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}
+\]
+と書き換えることも多いし、なんなら高校の教科書での定義はこっちですね。
+
+
+
+\section{例題集}
+
+\subsection{べき関数}
+
+まずは簡単なところから行きましょう。
+$n>0$を整数として、
+\[
+  f(x)=x^n
+\]
+を微分してゆきましょう。
+このとき
+\[
+  \frac{(x+h)^n-x^n}{h}=nx^{n-1}+\frac{n(n-1)}{2}hx^{n-2}+\cdots+h^{n-1}\to nx^{n-1}\quad\text{as }h\to 0
+\]
+ゆえに
+\[
+  (x^n)'=nx^{n-1}
+\]
+です。
+
+
+
+\section{微分の性質}
+
+\subsection{線形性}
+
+\subsection{積の微分}
+
+\subsection{商の微分}
+
+\subsection{合成関数の微分}
+
+\section{平均値の定理}
+
+\section{テイラー展開}
