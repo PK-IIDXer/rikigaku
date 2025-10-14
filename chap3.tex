@@ -57,14 +57,267 @@ $n>0$を整数として、
 
 \section{微分の性質}
 
+\subsection{微分可能ならば連続}
+
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を$I$上微分可能な関数とする。
+  このとき、$f$は$I$上連続である。
+\end{theorem}
+\begin{proof}
+  任意の$a\in I$と、十分0に近い$h>0$に対して、
+  \[
+    f(a+h)-f(a)=\frac{f(a+h)-f(a)}{h}\cdot h\to f'(a)\cdot\lim_{h\to0}h=0
+  \]
+  ゆえに$f$は連続。
+\end{proof}
+
 \subsection{線形性}
+
+\begin{theorem}
+  $I$を区間、$f,g:I\to\mathbb{R}$を$I$上微分可能な関数、$a,b\in\mathbb{R}$とする。
+  このとき、関数
+  \[
+    af+bg:I\to\mathbb{R};x\mapsto af(x)+bg(x)
+  \]
+  も$I$上可微分であり、
+  \[
+    (af+bg)'(x)=af'(x)+bg'(x)
+  \]
+  が成り立つ。
+\end{theorem}
+\begin{proof}
+  任意の$x\in I$と十分0に近い$h$に対して、
+  \begin{align*}
+    &\frac{\{af(x+h)+bg(x+h)\}-\{af(x)+bg(x)\}}{h}\\
+    =&a\frac{f(x+h)-f(x)}{h}+b\frac{g(x+h)-g(x)}{h}\\
+    \to&af'(x)+bg'(x)
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  多項式関数
+  \[
+    f(x)=a_0x^n+a_1x^{n-1}+\cdots+a_n\in\mathbb{R}[x]
+  \]
+  は、$\mathbb{R}$上微分可能であり、
+  \[
+    f'(x)=na_0x^{n-1}+(n-1)a_1x^{n-2}+\cdots+a_1
+  \]
+  が成り立つ。
+\end{example}
 
 \subsection{積の微分}
 
+\begin{theorem}
+  $I$を区間、$f,g:I\to\mathbb{R}$を$I$上微分可能な関数とする。
+  このとき、関数
+  \[
+    fg:I\to\mathbb{R};x\mapsto f(x)g(x)
+  \]
+  も$I$上可微分であり、
+  \[
+    (fg)'(x)=f'(x)g(x)+f(x)g'(x)
+  \]
+  がなりたつ。
+\end{theorem}
+\begin{proof}
+  任意の$x\in I$と十分0に近い$h$に対して、
+  \begin{align*}
+    &\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\
+    =&\frac{f(x+h)g(x+h)-f(x+h)g(x)+f(x+h)g(x)-f(x)g(x)}{h}\\
+    =&f(x+h)\frac{g(x+h)-g(x)}{h}+\frac{f(x+h)-f(x)}{h}g(x)\\
+    \to&f(x)g'(x)+f'(x)g(x)
+  \end{align*}
+  (最後に可微分関数の連続性を使用しています)
+\end{proof}
+
 \subsection{商の微分}
 
-\subsection{合成関数の微分}
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を$I$上微分可能かつ、$f(x)\neq0$ (${}^\forall x\in I$)をみたす関数とする。
+  このとき、
+  \[
+    \frac{1}{f}:I\to\mathbb{R};x\mapsto\frac{1}{f(x)}
+  \]
+  もまた$I$上微分可能であり、
+  \[
+    \left(\frac{1}{f}\right)'(x)=-\frac{f'(x)}{f(x)^2}
+  \]
+  が成り立つ。
+\end{theorem}
+\begin{proof}
+  任意の$x\in I$と十分0に近い$h$に対して、
+  \begin{align*}
+    &\frac{1/f(x+h)-1/f(x)}{h}\\
+    =&-\frac{1}{f(x)f(x+h)}\frac{f(x+h)-f(x)}{h}\\
+    \to&-\frac{f'(x)}{f(x)^2}
+  \end{align*}
+\end{proof}
 
-\section{平均値の定理}
+\begin{example}
+  $f,g$を$I$上微分可能な関数で、$g$は$I$上0にならないとする。
+  このとき、積の微分と商の微分から
+  \[
+    \frac{f}{g}:I\to\mathbb{R}
+  \]
+  も$I$上可微分関数であり、
+  \[
+    \left(\frac{f}{g}\right)'(x)=f'(x)\frac{1}{g(x)}+f(x)\left(\frac{1}{g}\right)'(x)=\frac{f'(x)}{g(x)}-\frac{f(x)g'(x)}{g(x)^2}=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}
+  \]
+\end{example}
+
+\begin{example}
+  $x\neq0$に対して
+  \[
+    (x^{-1})'=\frac{(x)'}{x^2}=-\frac{1}{x^2}=-x^{-2}
+  \]
+
+  一般に、任意の整数$n>0$について
+  \[
+    (x^{-n})'=-nx^{-n-1}
+  \]
+  であることが帰納法により次のように示せる。
+  仮に$(x^{-n+1})'=(-n+1)x^{-n}$が成り立つとすると、
+  \[
+    (x^{-n})'=(x^{-1}\cdot x^{-n+1})'=-x^{-2}\cdot x^{-n+1}+x^{-1}\cdot(-n+1)x^{-n}=-nx^{-n-1}
+  \]
+
+  ゆえに一般の整数$n\in\mathbb{Z}$に対して、
+  \[
+    (x^n)'=nx^{n-1}
+  \]
+  が成り立つ。
+\end{example}
+
+
+
+\section{平均値の定理}\label{sec:mean-value-theorem}
+
+まず補題として、ロルの定理を証明します。
+\begin{theorem}[ロルの定理]
+  $a,b\in\mathbb{R}$、$a<b$とする。
+  連続写像$f:[a,b]\to\mathbb{R}$が開区間$(a,b)$で微分可能であり、かつ$f(a)=f(b)$とする。
+  このとき、ある$c\in(a,b)$が存在して、$f'(c)=0$を満たす。
+\end{theorem}
+\begin{proof}
+  閉区間$[a,b]$はコンパクトだから、最大値最小値の定理より、値域には最大値$M$と最小値$m$が存在する。
+  もし$m=M$であれば、$f$は定値関数だから定理は自明。
+  ゆえに$m<M$であるとしてよい。
+  このとき$m<f(a)=f(b)$または$f(a)=f(b)<M$である。
+  ここでは$f(a)=f(b)<M$の場合を証明する($m<f(a)=f(b)$の場合も同様)。
+
+  $M=f(c)$となる$c\in(a,b)$をとる。
+  このとき、$f'(c)=0$を証明する。
+  仮に$L:=f'(c)>0$であるとすると、$f$は$c\in(a,b)$で微分可能なので、$\varepsilon:=L/2>0$に対して、ある$\delta>0$が存在して、
+  \[
+    0<|x-c|<\delta\Rightarrow\left|\frac{f(x)-f(c)}{x-c}-L\right|<\frac{L}{2}
+  \]
+  よって$0<|x-c|<\delta$のとき、
+  \begin{align*}
+    &-\frac{L}{2}<\frac{f(x)-f(c)}{x-c}-L<\frac{L}{2}\\
+    \iff&\frac{L}{2}<\frac{f(x)-f(c)}{x-c}<\frac{3L}{2}
+  \end{align*}
+  $x$として$0<x-c<\delta$を満たすように取っておけば、上記の不等式の辺々に$x-c$をかけることで
+  \[
+    f(x)-f(c)>\frac{L}{2}(x-c)>0
+  \]
+  ゆえに$f(x)>f(c)=M$となり、$M$が最大値であったことに矛盾。
+
+  もし$L:=f'(c)<0$のときは、$\varepsilon:=-L/2>0$に対して、ある$\delta'>0$が存在して、
+  \[
+    0<|x-c|<\delta'\Rightarrow\left|\frac{f(x)-f(c)}{x-c}-L\right|<-\frac{L}{2}
+  \]
+  より、$0<|x-c|<\delta$のとき、
+  \begin{align*}
+    &\frac{L}{2}<\frac{f(x)-f(c)}{x-c}-L<-\frac{L}{2}\\
+    \iff&\frac{3L}{2}<\frac{f(x)-f(c)}{x-c}<\frac{L}{2}\\
+    \therefore\;0>x-c>-\delta'\Rightarrow& f(x)-f(c)>\frac{L}{2}(x-c)>0
+  \end{align*}
+  より$f(x)>f(c)=M$となって矛盾。
+  以上より、$f'(c)=0$でなければならない。
+\end{proof}
+
+\begin{theorem}[平均値の定理]
+  連続写像$f:[a,b]\to\mathbb{R}$が開区間$(a,b)$で微分可能とする。
+  このとき、$c\in(a,b)$が存在して、
+  \[
+    \frac{f(b)-f(a)}{b-a}=f'(c)
+  \]
+  を満たす。
+\end{theorem}
+\begin{proof}
+  \[
+    g:[a,b]\to\mathbb{R};x\mapsto (b-a)(f(x)-f(a))-(x-a)(f(b)-f(a))
+  \]
+  を考えると、これは仮定より$[a,b]$上連続かつ$x\in(a,b)$で微分可能。
+  また
+  \[
+    g(a)=g(b)=0
+  \]
+  ゆえ、ロルの定理より
+  \[
+    0=g'(c)=(b-a)f'(c)-(f(b)-f(a))
+  \]
+  となる$c\in(a,b)$が存在する。
+  ゆえに
+  \[
+    f'(c)=\frac{f(b)-f(a)}{b-a}
+  \]
+\end{proof}
+
+\begin{corollary}[合成関数の微分]
+  $I,J$を区間、$u:I\to J$と$f:J\to\mathbb{R}$をそれぞれ可微分関数とする。
+  さらに導関数$f':J\to\mathbb{R}$は連続でもあるとする。
+  このとき、合成関数
+  \[
+    f\circ u:I\to\mathbb{R};x\mapsto f(u(x))
+  \]
+  も微分可能であり、
+  \[
+    (f\circ u)'(x)=f'(u(x))u'(x)
+  \]
+  が成り立つ。
+\end{corollary}
+\begin{proof}
+  任意の$x\in I$と十分0に近い$h$をとる。
+  証明は二つのケースに分けられる。
+
+  まずある$x$の近傍が存在して、十分0に近い任意の$h$に対して$u(x)\neq u(x+h)$であるとする。
+  以下では$u(x)<u(x+h)$であるとする($u(x)>u(x+h)$でも同様)。
+  仮定より$f$は$[u(x),u(x+h)]\subset J$において連続かつ微分可能なため、平均値の定理より
+  \[
+    \frac{f(u(x+h))-f(u(x))}{u(x+h)-u(x)}=f'(c_h)
+  \]
+  を満たす$c_h\in[u(x),u(x+h)]$が存在する。
+  よって
+  \[
+    \frac{f(u(x+h))-f(u(x))}{h}=f'(c_h)\frac{u(x+h)-u(x)}{h}
+  \]
+  $h\to0$のとき$c_h\in[u(x),u(x+h)]$であるから$c_h\to u(x)$。
+  また仮定より$f'$は連続だったから、$f'(c_h)\to f'(u(x))$となる。
+  さらに$u$は微分可能だったから、すべてまとめて
+  \[
+    (f\circ u)'(x)=\lim_{h\to0}\frac{f(u(x+h))-f(u(x))}{h}=\lim_{h\to0}\left\{f'(c_h)\frac{u(x+h)-u(x)}{h}\right\}=f'(u(x))u'(x)
+  \]
+
+  次に任意の$x$の近傍に対して、どのような$h$をとっても$u(x)=u(x+h)$であるようなものが存在するとする。
+  このとき、
+  \[
+    \frac{f(u(x+h))-f(u(x))}{h}=\frac{f(u(x))-f(u(x))}{h}=0
+  \]
+  ゆえに$(f\circ u)'(x)=0$である。
+  一方
+  \[
+    u'(x)=\lim_{h\to0}\frac{u(x+h)-u(x)}{h}=\lim_{h\to0}\frac{u(x)-u(x)}{h}=0
+  \]
+  が成り立つ\footnote{
+    これが成り立つのは、大前提として$(u(x+h)-u(x))/h$の極限が存在するという仮定が含まれているからです。
+    「任意の$x$の近傍に対して、どのような$h$をとっても$u(x)=u(x+h)$であるようなものが存在する」という仮定から、数列$h_n$であって、$h_n\to0$ ($n\to+\infty$)かつ、$u(x+h_n)=u(x)$ (${}^\forall n$)を満たすものが作れます。
+    これについて、$u'(x)$は$(u(x+h_n)-u(x))/h_n=0$の$n\to+\infty$に関する極限に一致するというわけです。
+  }。
+  ゆえに与式は成り立つ。
+\end{proof}
+
+
 
 \section{テイラー展開}
