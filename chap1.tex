@@ -55,14 +55,13 @@
 次のざっくりした例で、極限が存在しない可能性を垣間見てみましょう。
 
 \begin{example}
-  1次元の質点の運動
+  関数
   \[
-    \gamma(t):=|t|
+    f:\mathbb{R}\to\mathbb{R};t\mapsto|t|
   \]
   を考える。このとき、$x=0$とすると
   \begin{align*}
-    \frac{\gamma(y)-\gamma(0)}{y-0}&=\frac{|y|}{y}\\
-    &=\begin{cases}
+    \frac{f(y)-f(0)}{y-0}&=\frac{|y|}{y}=\begin{cases}
       1 & y>0\\
       -1 & y<0
     \end{cases}
@@ -171,9 +170,24 @@
       \left|\frac{f(x)-f(a)}{x-a}-L\right| & (x>a)\\
       0 & (x<a)
     \end{cases}\\
-    <&0
+    <&\epsilon
   \end{align*}
 \end{proof}
+
+当然ながら同様に、次が成り立ちます
+\begin{theorem}
+  $I=[a,b]$を閉区間、$f:I\to\mathbb{R}$を連続写像とする。
+  このとき、極限
+  \[
+    \lim_{x\to b-0}\frac{f(b)-f(x)}{b-x}
+  \]
+  が存在することと、以下の条件が満たされることは必要十分である。
+  点$b$を含むある開区間$I_b$と、関数$g:I_b\to\mathbb{R}$が存在して、
+  \begin{itemize}
+    \item $f|_{I\cap I_b}=g|_{I\cap I_b}$
+    \item $g$は$b\in I_b$で微分可能
+  \end{itemize}
+\end{theorem}
 
 これで、どんな区間であっても、その区間上の関数が微分可能かどうかを気楽に論じることができます。
 \begin{definition}
