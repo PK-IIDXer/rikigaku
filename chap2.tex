@@ -43,7 +43,7 @@
   質点$\gamma$の運動が等速直線運動であるとすると、任意の$t,t_0\in I$に対して、$\dot\gamma(t)=\dot\gamma(t_0)$。
   ゆえに
   \[
-    \ddot\gamma(t_0)\lim_{t\to t_0}\frac{\dot\gamma(t)-\dot\gamma(t_0)}{t-t_0}=0
+    \ddot\gamma(t_0)=\lim_{t\to t_0}\frac{\dot\gamma(t)-\dot\gamma(t_0)}{t-t_0}=0
   \]
   ゆえに$\ddot\gamma(t_0)=0$ (${}^\forall t_0\in I$)。
 
@@ -148,8 +148,8 @@
 
 このように色々な力があるんですが、大きく分けて２種類あると考えましょう。
 \begin{itemize}
-  \item 外力$F_a$は、$I\times\mathbb{R}^3\times\mathbb{R}^3$から$\mathbb{R}^3$への連続写像
-  \item 束縛力$F_c$は、束縛条件を与える方程式$g(t,x,y,z)=0$によって与えられる力。
+  \item 外力$F$とは、$I\times\mathbb{R}^3\times\mathbb{R}^3$の開集合$U$から$\mathbb{R}^3$への連続写像
+  \item 束縛力$F_c$は、観測事実から逆算ないし予測して追加されるベクトル量
 \end{itemize}
 質点$(I,\gamma)$に外力$F$がかかっている様子は、
 \[
@@ -200,6 +200,7 @@
 \begin{definition}[ガリレイ変換と慣性系]
   $(t,x,y,z)$を標準慣性系、$t'$を実数、$(t_0,x_0,y_0,z_0)\in\mathbb{R}^4, (v_x,v_y,v_z)\in\mathbb{R}^3$をベクトル、また
   \[
+    R:=
     \begin{pmatrix}
       R_{11} & R_{12} & R_{13} \\
       R_{21} & R_{22} & R_{23} \\
@@ -228,7 +229,7 @@
     \]
     によって生成されます。
   }であるとする。
-  このとき、線形写像
+  このとき、写像
   \[
     \begin{pmatrix}
       t'\\x'\\y'\\z'
@@ -251,9 +252,9 @@
   を\textbf{ガリレイ変換}といい、ガリレイ変換後の座標系
   \begin{align*}
     t'&=t+t_0\\
-    x'&=v_1t+R_{11}x+R_{12}y+R_{13}z\\
-    y'&=v_2t+R_{21}x+R_{22}y+R_{23}z\\
-    z'&=v_3t+R_{31}x+R_{32}y+R_{33}z
+    x'&=v_1t+R_{11}x+R_{12}y+R_{13}z+x_0\\
+    y'&=v_2t+R_{21}x+R_{22}y+R_{23}z+y_0\\
+    z'&=v_3t+R_{31}x+R_{32}y+R_{33}z+z_0
   \end{align*}
   を\textbf{慣性系}という。
 \end{definition}
@@ -285,31 +286,68 @@
   ある慣性系において、合力0の力がかかっている質点を\textbf{自由粒子}と呼ぶ。
 \end{definition}
 \begin{definition}[慣性の法則]
-  ある慣性系において、合力0がかかっている任意の質点は、(静止を含めた)等速直線運動をする。
+  自由粒子は(静止を含めた)等速直線運動をする。
   数式で書けば、ある慣性系$(t,x,y,z)$において、自由粒子$(I,\gamma)$は
   \[
-    \ddot\gamma(t)=0\iff\gamma(t)=v_0t+\gamma_0
+    \ddot\gamma(t)=0
   \]
-  を満たす。ただし、$v_0:=\dot\gamma(t_0), \gamma_0:=\gamma(t_0), t_0\in I$である。
+  を満たす。
 \end{definition}
 
 慣性の法則がガリレイの相対性原理を満たしていることを確認しましょう。
 質点の運動に関してガリレイ変換をすると
 \[
-  \gamma(t)=\begin{pmatrix}
-    t'&=&t+t_0\\
-    \gamma'_x(t)&=&v_1t+R_{11}\gamma_x(t)+R_{12}\gamma_y(t)+R_{13}\gamma_z(t)\\
-    \gamma'_y(t)&=&v_2t+R_{21}\gamma_x(t)+R_{22}\gamma_y(t)+R_{23}\gamma_z(t)\\
-    \gamma'_z(t)&=&v_3t+R_{31}\gamma_x(t)+R_{32}\gamma_y(t)+R_{33}\gamma_z(t)
+  \begin{pmatrix}
+    t'\\
+    \gamma'_x(t')\\
+    \gamma'_y(t')\\
+    \gamma'_z(t')
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    t+t_0\\
+    v_1t+R_{11}\gamma_x(t)+R_{12}\gamma_y(t)+R_{13}\gamma_z(t)+x_0\\
+    v_2t+R_{21}\gamma_x(t)+R_{22}\gamma_y(t)+R_{23}\gamma_z(t)+y_0\\
+    v_3t+R_{31}\gamma_x(t)+R_{32}\gamma_y(t)+R_{33}\gamma_z(t)+z_0
   \end{pmatrix}
 \]
 というふうにガラガラ変わってしまいます。
 ところがこれの1回微分は
-\[
-  \frac{d^2\gamma'(t)}{dt^2}=\frac{d^2\gamma(t)}{dt^2}=0
-\]
-を満たすので、慣性の法則はガリレイの相対性原理を満たしています。
-これは、慣性の法則が、ちゃんと力学の法則なってますよと保証してくれています。
+\begin{align*}
+  \frac{d\gamma'(t')}{dt'}&=\frac{dt}{dt'}\frac{d\gamma'(t')}{dt}=\frac{d(t'-t_0)}{dt'}\frac{d\gamma'(t')}{dt}=\frac{d\gamma'(t')}{dt}\\
+  &=\frac{d}{dt}
+  \begin{pmatrix}
+    v_1t+R_{11}\gamma_x(t)+R_{12}\gamma_y(t)+R_{13}\gamma_z(t)+x_0\\
+    v_2t+R_{21}\gamma_x(t)+R_{22}\gamma_y(t)+R_{23}\gamma_z(t)+y_0\\
+    v_3t+R_{31}\gamma_x(t)+R_{32}\gamma_y(t)+R_{33}\gamma_z(t)+z_0
+  \end{pmatrix}\\
+  &=
+  \begin{pmatrix}
+    v_1+R_{11}\dot\gamma_x(t)+R_{12}\dot\gamma_y(t)+R_{13}\dot\gamma_z(t)\\
+    v_2+R_{21}\dot\gamma_x(t)+R_{22}\dot\gamma_y(t)+R_{23}\dot\gamma_z(t)\\
+    v_3+R_{31}\dot\gamma_x(t)+R_{32}\dot\gamma_y(t)+R_{33}\dot\gamma_z(t)
+  \end{pmatrix}
+\end{align*}
+となり、もう一度微分すると
+\begin{align*}
+  \frac{d^2\gamma'(t')}{dt'^2}&=\frac{d}{dt}
+  \begin{pmatrix}
+    v_1+R_{11}\dot\gamma_x(t)+R_{12}\dot\gamma_y(t)+R_{13}\dot\gamma_z(t)\\
+    v_2+R_{21}\dot\gamma_x(t)+R_{22}\dot\gamma_y(t)+R_{23}\dot\gamma_z(t)\\
+    v_3+R_{31}\dot\gamma_x(t)+R_{32}\dot\gamma_y(t)+R_{33}\dot\gamma_z(t)
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    R_{11}\ddot\gamma_x(t)+R_{12}\ddot\gamma_y(t)+R_{13}\ddot\gamma_z(t)\\
+    R_{21}\ddot\gamma_x(t)+R_{22}\ddot\gamma_y(t)+R_{23}\ddot\gamma_z(t)\\
+    R_{31}\ddot\gamma_x(t)+R_{32}\ddot\gamma_y(t)+R_{33}\ddot\gamma_z(t)
+  \end{pmatrix}\\
+  &=R\frac{d^2\gamma(t)}{dt^2}
+\end{align*}
+を満たすので、「質点の二階微分が消える」という性質はガリレイ変換で保たれており\footnote{
+  回転行列はもちろん正則行列だから。
+}、慣性の法則はガリレイの相対性原理を満たしています。
+これは、慣性の法則がちゃんと力学の法則なってますよと保証してくれています。
 
 \subsection{運動方程式}
 
@@ -327,7 +365,8 @@
 
 これで力学の最も基本的な法則を定義することができます。
 \begin{definition}[運動方程式]
-  質量付き質点$(I,\gamma,m)$と外力$F:I\times\mathbb{R}^3\times\mathbb{R}^3\to\mathbb{R}^3$に対して、
+  $I$を区間、$U\subset I\times\mathbb{R}^3\times\mathbb{R}^3$を開集合とする。
+  質量付き質点$(I,\gamma,m)$と外力$F:U\to\mathbb{R}^3$に対して、
   \[
     F(t,\gamma(t),\dot\gamma(t))=m\ddot\gamma(t)
   \]
@@ -341,3 +380,91 @@
 ニュートン以降は「この両者の関係がこのように定まっていると仮定する」としている感覚に近いかもしれません。
 少なくとも『本当にそうなのか？そもそも「力」って何？』という哲学っぽい問題にまで踏み込んでないです。
 ともあれこの前提によって、不思議なことに色々な現実の問題を解決することができるのです。
+
+ところで、運動方程式の定義における力は外力のみ考えています。
+実際には垂直抗力などの$F(t,\gamma(t),\dot\gamma(t))$ではとらえきれない、質点の運動を実験によって観測してモデル化しないと定式できない力もあるのでした。
+現実問題を考えるに当たっては、例えば空気抵抗のように、左辺にそのような項を加えて方程式を解いていきます。
+しかし「力学の基本原理」という意味では、そのような力を加えるべきではないでしょう。
+
+力学の基本原理といえば、ガリレイ変換で不変であるべきなのでした。
+そこのところどうなのか、見ていきましょう。
+
+\subsection{力のガリレイ変換}
+
+加速度$\ddot\gamma(t)$はガリレイ変換
+\[
+  \begin{pmatrix}
+    t'\\x'\\y'\\z'
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    v_1 & R_{11} & R_{12} & R_{13} \\
+    v_2 & R_{21} & R_{22} & R_{23} \\
+    v_3 & R_{31} & R_{32} & R_{33}
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}
+\]
+に対して、
+\[
+  \frac{d^2\gamma'(t')}{dt'}=R\frac{d^2\gamma(t)}{dt^2}
+\]
+と変換することを見ています。
+「ガリレイ変換で不変な法則のみが根本的な力学の原理である」とする立場を厳守するならば、運動方程式
+\[
+  F(t,\gamma(t),\dot\gamma(t))=m\ddot\gamma(t)
+\]
+の左辺もガリレイ変換後、ガリレイ変換の回転行列部分$R$が掛かる形で変換されねばなりません。
+\[
+  F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{y'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
+\]
+実際のところ、運動方程式においては上記を仮定に加えることにします。
+\begin{definition}
+  $F$を外力とする。
+  ガリレイ変換
+  \[
+    \begin{pmatrix}
+      t'\\x'\\y'\\z'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1 & 0 & 0 & 0 \\
+      v_1 & R_{11} & R_{12} & R_{13} \\
+      v_2 & R_{21} & R_{22} & R_{23} \\
+      v_3 & R_{31} & R_{32} & R_{33}
+    \end{pmatrix}
+    \begin{pmatrix}
+      t\\x\\y\\z
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+      t_0\\x_0\\y_0\\z_0
+    \end{pmatrix}
+  \]
+  に対して、
+  \[
+    F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{y'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
+  \]
+  と変換する外力を\textbf{ガリレイ不変な外力}または\textbf{真の力}\footnote{
+    コリオリ力などの「見かけの力」に対応しての命名。使うかどうかは未定。
+  }と呼ぶ。
+\end{definition}
+
+これによって運動方程式を修正しましょう。
+\begin{definition}[運動方程式]
+  $I$を区間、$U\subset I\times\mathbb{R}^3\times\mathbb{R}^3$を開集合とする。
+  質量付き質点$(I,\gamma,m)$とガリレイ不変な外力$F:U\to\mathbb{R}^3$に対して、
+  \[
+    F(t,\gamma(t),\dot\gamma(t))=m\ddot\gamma(t)
+  \]
+  が成り立つ。
+\end{definition}
+
+これはあくまで基本原理であって、宇宙の法則はこれに従っているだろうというニュートンのモデリングにすぎません(多分)。
+なのでもちろん、例えば空気抵抗ありの落下運動のように、ガリレイ不変とは限らない力を考慮して、運動方程式を立てて解くという場面もよく見かけます。
