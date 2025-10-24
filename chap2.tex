@@ -102,7 +102,7 @@
 物理学は常に、先行研究や実験事実をフォローすることを求められます。
 先行研究や実験事実をフォローすれば、うまくいったと言えるでしょう。
 
-\subsection{天体の運行}
+\subsection{当時の先行研究：天体の運行}
 
 ニュートンの時代には、天体の観測技術が十分高まっており、星々の運行に関する膨大な研究データが存在していたようです。
 それらのデータから、ケプラーは有名な３法則を導きました。
@@ -207,7 +207,7 @@
       R_{31} & R_{32} & R_{33}
     \end{pmatrix}
   \]
-  は回転行列\footnote{
+  は(時間に依存しない)回転行列\footnote{
     $R$をこの行列としたとき、縦に並んでいる3本のベクトルが互いに直交していて長さが1、かつ、行列式が1なものを(3次の)回転行列といいます。
     具体的には
     \[
@@ -249,7 +249,11 @@
       t_0\\x_0\\y_0\\z_0
     \end{pmatrix}
   \]
-  を\textbf{ガリレイ変換}といい、ガリレイ変換後の座標系
+  を\textbf{ガリレイ変換}といい、
+  \[
+    G:\mathbb{R}\times\mathbb{R}^3\to\mathbb{R}\times\mathbb{R}^3
+  \]
+  で表す。ガリレイ変換後の座標系
   \begin{align*}
     t'&=t+t_0\\
     x'&=v_1t+R_{11}x+R_{12}y+R_{13}z+x_0\\
@@ -266,7 +270,7 @@
     t'&=t+t_0\\
     x'&=v_1t+x\\
     y'&=y\\
-    y'&=z
+    z'&=z
   \end{align*}
   となります。これは、$x$軸上をトコトコ走る列車に乗った実験室をイメージしたものになっています。
 \end{example}
@@ -449,7 +453,7 @@
   \]
   に対して、
   \[
-    F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{y'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
+    F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{z'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
   \]
   と変換する外力を\textbf{ガリレイ不変な外力}または\textbf{真の力}\footnote{
     コリオリ力などの「見かけの力」に対応しての命名。使うかどうかは未定。
@@ -468,3 +472,208 @@
 
 これはあくまで基本原理であって、宇宙の法則はこれに従っているだろうというニュートンのモデリングにすぎません(多分)。
 なのでもちろん、例えば空気抵抗ありの落下運動のように、ガリレイ不変とは限らない力を考慮して、運動方程式を立てて解くという場面もよく見かけます。
+
+\subsection{ガリレイの相対性原理について一言}
+
+任意の二つのガリレイ変換$G,G'$を合成すると、それはまたガリレイ変換になっています。
+実際、
+\begin{align*}
+  G
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}&=
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    v_1 & R_{11} & R_{12} & R_{13} \\
+    v_2 & R_{21} & R_{22} & R_{23} \\
+    v_3 & R_{31} & R_{32} & R_{33}
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}=:
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v} & R
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}\\
+  G'
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}&=
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    v'_1 & R'_{11} & R'_{12} & R'_{13} \\
+    v'_2 & R'_{21} & R'_{22} & R'_{23} \\
+    v'_3 & R'_{31} & R'_{32} & R'_{33}
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t'_0\\x'_0\\y'_0\\z'_0
+  \end{pmatrix}=:
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}' & R'
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t'_0\\x'_0\\y'_0\\z'_0
+  \end{pmatrix}
+\end{align*}
+とおくと\footnote{
+  $\mathbf{v},\mathbf{v}'$は3次元の縦ベクトル、$R,R'$は3次直交行列になります。
+}、
+\begin{align*}
+  G'\left(G
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}\right)&=G'\left(
+    \begin{pmatrix}
+      1 & 0 \\
+      \mathbf{v} & R
+    \end{pmatrix}
+    \begin{pmatrix}
+      t\\x\\y\\z
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+      t_0\\x_0\\y_0\\z_0
+    \end{pmatrix}
+  \right)\\
+  &=
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}' & R'
+  \end{pmatrix}\left(
+    \begin{pmatrix}
+      1 & 0 \\
+      \mathbf{v} & R
+    \end{pmatrix}
+    \begin{pmatrix}
+      t\\x\\y\\z
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+      t_0\\x_0\\y_0\\z_0
+    \end{pmatrix}
+  \right)
+  +
+  \begin{pmatrix}
+    t'_0\\x'_0\\y'_0\\z'_0
+  \end{pmatrix}\\
+  &=
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}' & R'
+  \end{pmatrix}
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v} & R
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}' & R'
+  \end{pmatrix}
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t'_0\\x'_0\\y'_0\\z'_0
+  \end{pmatrix}\\
+  &=
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}'+R'\mathbf{v} & R'R
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v}' & R'
+  \end{pmatrix}
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t'_0\\x'_0\\y'_0\\z'_0
+  \end{pmatrix}
+\end{align*}
+これがガリレイ変換になってることを示すためには、$R'R$がまた直交行列になっていることを証明しなければなりませんが、これは
+\[
+  (R'R)^t(R'R)=R^t(R')^tR'R=R^tIR=R^tR=I
+\]
+から分かります。
+
+また、任意のガリレイ変換$G$に対して、その逆変換$G^{-1}$を作ることができます。
+実際、
+\begin{align*}
+  G
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}&=
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v} & R
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}
+\end{align*}
+に対して、
+\begin{align*}
+  G^{-1}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}&=
+  \begin{pmatrix}
+    1 & 0 \\
+    -R^t\mathbf{v} & R^t
+  \end{pmatrix}
+  \begin{pmatrix}
+    t\\x\\y\\z
+  \end{pmatrix}
+  +
+  \begin{pmatrix}
+    1 & 0 \\
+    \mathbf{v} & R
+  \end{pmatrix}
+  \begin{pmatrix}
+    t_0\\x_0\\y_0\\z_0
+  \end{pmatrix}
+\end{align*}
+とすれば、$G^{-1}$が逆写像であることが簡単にわかります。
+
+要は
+\begin{theorem}
+  ガリレイ変換のなす集合は、写像の合成に関して群をなす。
+\end{theorem}
+ということです\footnote{
+  結合法則は明らかでしょう。気になるなら確かめてみてください。
+}。
