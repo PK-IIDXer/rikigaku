@@ -426,7 +426,7 @@
 \]
 の左辺もガリレイ変換後、ガリレイ変換の回転行列部分$R$が掛かる形で変換されねばなりません。
 \[
-  F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{z'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
+  F\left(t',\begin{pmatrix}x'\\y'\\z'\end{pmatrix},\begin{pmatrix}\dot{x'}\\\dot{y'}\\\dot{z'}\end{pmatrix}\right)=RF\left(t,\begin{pmatrix}x\\y\\z\end{pmatrix},\begin{pmatrix}\dot{x}\\\dot{y}\\\dot{z}\end{pmatrix}\right)
 \]
 実際のところ、運動方程式においては上記を仮定に加えることにします。
 \begin{definition}
@@ -453,7 +453,7 @@
   \]
   に対して、
   \[
-    F(t',(x',y',z'),(\dot{x'},\dot{y'},\dot{z'}))=RF(t,(x,y,z),(\dot{x},\dot{y},\dot{z}))
+    F\left(t',\begin{pmatrix}x'\\y'\\z'\end{pmatrix},\begin{pmatrix}\dot{x'}\\\dot{y'}\\\dot{z'}\end{pmatrix}\right)=RF\left(t,\begin{pmatrix}x\\y\\z\end{pmatrix},\begin{pmatrix}\dot{x}\\\dot{y}\\\dot{z}\end{pmatrix}\right)
   \]
   と変換する外力を\textbf{ガリレイ不変な外力}または\textbf{真の力}\footnote{
     コリオリ力などの「見かけの力」に対応しての命名。使うかどうかは未定。
