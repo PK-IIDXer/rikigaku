@@ -1,0 +1,495 @@
+
+\chapter{積分の基礎}
+
+\section{積分の基本性質}
+
+積分の定義から分かる性質を述べていきます。
+その前に前章でしれっと証明してサラッと流した次の事実は重要なので、ここに掲示しておきましょう。
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を微分可能な関数で、$f'(x)=0$ (${}^\forall x\in I$)を満たすとする。
+  このとき、$f$は定値関数である。
+\end{theorem}
+
+\subsection{積分の線形性}
+
+\begin{theorem}
+  $I$を区間、$f,g:I\to\mathbb{R}$を連続関数、$a,b\in\mathbb{R}$とする。
+  このとき、連続関数$af+bg:I\to\mathbb{R}$の不定積分に関して、以下が成り立つ。
+  \[
+    \int(af(x)+bg(x))dx=a\int f(x)dx+b\int g(x)dx
+  \]
+\end{theorem}
+\begin{proof}
+  微分積分学の基本定理と微分の線形性から、両辺の微分が一致することは明らか。
+  従って
+  \[
+    \int(af(x)+bg(x))dx-\left\{a\int f(x)dx+b\int g(x)dx\right\}
+  \]
+  は定数であるが、不定積分は定数の違いは区別しないため、題意が成り立つ。
+\end{proof}
+
+\begin{example}
+  多項式
+  \[
+    f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0
+  \]
+  を積分すると、
+  \[
+    \int f(x)dx=\frac{a_n}{n+1}x^{n+1}+\frac{a_{n-1}}{n}x^n+\cdots+a_0x+C
+  \]
+  となります。$C$は積分定数です。
+\end{example}
+
+\subsection{部分積分}
+
+\begin{theorem}
+  $I$を区間、$f,g:I\to\mathbb{R}$を可微分関数とする。
+  このとき、以下が成り立つ。
+  \[
+    \int f(x)g'(x)dx=f(x)g(x)-\int f'(x)g(x)dx
+  \]
+\end{theorem}
+\begin{proof}
+  積の微分公式
+  \[
+    (fg)'(x)=f'(x)g(x)+f(x)g'(x)
+  \]
+  の両辺を積分すると、積分の線形性から
+  \[
+    f(x)g(x)+C=\int f'(x)g(x)dx+\int f(x)g'(x)dx
+  \]
+  これを移項して、積分定数を吸収すれば、題意を得る。
+\end{proof}
+
+証明は簡単すぎるので省きますが、定積分バージョンは次のようになります。
+\begin{theorem}
+  $I=[a,b]$を区間、$f,g:I\to\mathbb{R}$を可微分関数とする。
+  このとき、以下が成り立つ。
+  \[
+    \int_a^b f(x)g'(x)dx=\{f(b)g(b)-f(a)g(a)\}-\int_a^b f'(x)g(x)dx
+  \]
+\end{theorem}
+
+\subsection{置換積分}
+
+\begin{theorem}
+  $I,J$を区間、$u:I\to J$を可微分関数とする。
+  また$f:J\to\mathbb{R}$は連続関数で、$F:J\to\mathbb{R}$をその原始関数の一つとする。
+  このとき、任意の$t\in I$に対して次が成り立つ\footnote{
+    $x=u(t)$で微分するか$t$で微分するかの違いを明確にするため、以下では微分に$d/dx$や$d/dt$を使用します。
+  }。
+  \[
+    \int f(u(t))\frac{du(t)}{dt}dt=F(u(t))
+  \]
+\end{theorem}
+\begin{proof}
+  右辺の$t$による微分は、合成関数の微分から
+  \[
+    \frac{dF(u(t))}{dt}=f(u(t))\frac{du(t)}{dt}
+  \]
+  となる。
+  これは明らかに左辺の$t$による微分と一致するため、与式の左辺と右辺は積分定数の違いしか存在しない。
+  ゆえに題意が成り立つ。
+\end{proof}
+上記の主張と証明は、$\int f(u(t))\frac{du(t)}{dt}dt$および$F(u(t))$が$t\in I$の関数とみて正しい等式です。
+これを$x\in J$の関数とみても正しい等式に「戻す」ためには、$u$は全単射かつ、逆関数$u^{-1}$も可微分であるという仮定を必要とします。
+
+従って定積分版は次のようになります。
+\begin{theorem}
+  $I=[a,b],J=[\alpha,\beta]$を区間、$u:I\to J$を全単射可微分関数とする。
+  また$f:J\to\mathbb{R}$は連続関数とする。
+  このとき次が成り立つ。
+  \[
+    \int_a^b f(u(t))\frac{du(t)}{dt}dt=\int_\alpha^\beta f(x)dx
+  \]
+\end{theorem}
+
+
+
+\section{対数関数と指数関数}
+
+$n\neq-1$のとき
+\[
+  \int x^ndx=\frac{x^{n+1}}{n+1}+C
+\]
+なのでした。
+これは$n=-1$で成り立たない公式です。しかし
+\[
+  \frac1x:(0,+\infty)\to\mathbb{R}
+\]
+は連続なので、$(0,+\infty)$に含まれる任意の閉区間で積分可能なはずです。
+これがどんな性質をもつ関数になるか調べていきましょう。
+
+\subsection{対数関数}
+
+$x>0$に対して
+\[
+  f(x):=\int_1^x\frac{1}{\xi}d\xi
+\]
+とおきます\footnote{
+  積分範囲を$0$から取らず$1$から取っているのは、$x=0$だと$1/x$が定義されないからです。
+  じゃあなんで$1$を取ったのかというと、そこはまあなんでもいいんですけど、ようは$f(x)$は対数関数なので$f(1)=0$としたいからです。
+}。
+この関数の性質を調べていきましょう。
+まず微分すると
+\[
+  f'(x)=\frac1x>0
+\]
+であることから、$f$は単調増加です。
+$f:(0,+\infty)\to\mathbb{R}$は特に単射です。
+実は全射でもあることが、次の補題から理解できます。
+\begin{lemma}
+  任意の有理数$a>0$と実数$x>0$に対して、
+  \[
+    f(x^a)=af(x)
+  \]
+  が成り立つ
+\end{lemma}
+\begin{proof}
+  合成関数の微分から
+  \[
+    (f(x^a))'=(x^a)'f'(x^a)=ax^{a-1}\frac1{x^a}=\frac{a}{x}
+  \]
+  一方、微分の線形性から
+  \[
+    (af(x))'=af'(x)=\frac{a}{x}
+  \]
+  となり、
+  \[
+    (f(x^a))'=(af(x))'\iff (f(x^a)-af(x))'=0
+  \]
+  が成り立つ。
+  微分して0になる関数は定数であるから、
+  \[
+    f(x^a)-af(x)=C
+  \]
+  とおくと、$x=1$のとき
+  \begin{align*}
+    f(1^a)&=f(1)=\int_1^{1}\frac1\xi d\xi=0\\
+    af(1)&=af(1)=a\cdot\int_1^{1}\frac1\xi d\xi=a\cdot0=0
+  \end{align*}
+  ゆえに$C=f(1^a)-af(1)=0$となり、題意が従う。
+\end{proof}
+一方$1\leq\xi\leq2$のとき$1/2\leq\xi\leq1$なので、
+\[
+  f(2)=\int_1^2 \frac1\xi d\xi \geq \int_1^2 \frac12 d\xi=\frac12>0
+\]
+を満たします。
+そこで、任意の$y>0$に対して、$nf(2)>y$となる自然数$n$を取ることができ、補題から
+\[
+  nf(2)=f(2^n)>y>0=f(1)
+\]
+ゆえに中間値の定理より、ある$1<c<2^n$が存在して、$f(c)=y$を満たします。
+
+任意の負の実数になることも、$1/2\leq\xi\leq1$のとき$1\leq\xi^{-1}\leq2$なので
+\[
+  f\left(\frac12\right)=\int_1^{1/2}\frac1\xi d\xi=-\int_{1/2}^1\frac1\xi d\xi\leq-\int_{1/2}^11d\xi=-\frac12<0
+\]
+となることから、正の実数と同様に示すことができます。
+
+またこの関数$f(x)=\int_1^x\xi^{-1}d\xi$は、次のような意味で「掛け算を足し算に変換」します。
+\begin{theorem}
+  任意の実数$x>0$, $y>0$に対して、
+  \[
+    f(xy)=f(x)+f(y)
+  \]
+  が成り立つ。
+\end{theorem}
+\begin{proof}
+  両辺を$y$を定数とみて$x$で微分すると、合成関数の微分から
+  \begin{align*}
+    \frac{df(xy)}{dx}=\frac{d}{dx}\int_1^{xy}\frac1\xi d\xi=y\cdot\frac1{xy}=\frac1x\\
+    \frac{d}{dx}(f(x)+f(y))=\frac{df(x)}{dx}=\frac1x
+  \end{align*}
+  となり、積分定数を除いて$f(xy)=f(x)+f(y)$が成り立ちます。
+  一方で$x=1$のときに両辺を比較すれば、厳密に等式がなりたつことがわかる。
+\end{proof}
+
+このように、存在だけが分かっている関数も、だんだん素性がわかってきました。
+といったところで、マシな名前をつけてあげましょう。
+\begin{definition}[対数関数]
+  \[
+    \log:(0,+\infty)\to\mathbb{R};x\mapsto\int_1^x\frac1\xi d\xi
+  \]
+  を対数関数と呼ぶ。
+\end{definition}
+
+対数関数に関する重要な性質をまとめると次になります。
+\begin{itemize}
+  \item $(0,+\infty)$から$\mathbb{R}$への単調増加かつ全射な関数
+  \item $(\log(x))'=1/x$ (${}^\forall x>0$)
+  \item $\log(x^p)=p\log(x)$ (${}^\forall x>0$, ${}^\forall p\in\mathbb{R}$)
+  \item $\log(1)=0$
+  \item $\log(xy)=\log(x)+\log(y)$ (${}^\forall x,y>0$)
+  \item $\log(1/x)=-\log(x)$ ($\log(x^p)=p\log(x)$において$p=-1$とする)
+\end{itemize}
+後半3つは、$\log$が、「区間$(0,+\infty)$と積がなす群」から「$\mathbb{R}$と和がなす群」への群準同型になっていることを意味します。
+微積分とはあまり関係のなさそうな性質ではありますが、ものごとはいろんな見方ができた方が、悪いってことはないです。
+
+\subsection{指数関数}
+
+対数関数は区間$(0,+\infty)$から$\mathbb{R}$への単調増加な全射なので、逆写像が存在します。
+これを仮に
+\[
+  g:\mathbb{R}\to(0,+\infty)
+\]
+とおきます。つまり
+\begin{align*}
+  \log(g(x))&=x\quad({}^\forall x\in\mathbb{R})\\
+  g(\log(x))&=x\quad({}^\forall x>0)
+\end{align*}
+が成り立つということです。
+
+定義と対数関数の性質からすぐにわかるのは、
+\begin{itemize}
+  \item $g(0)=1$
+  \item $g(x+y)=g(\log(g(x))+\log(g(y)))=g(\log(g(x)g(y)))=g(x)g(y)$
+  \item $g(-x)=g(-\log(g(x)))=g(\log(1/g(x)))=1/g(x)$
+\end{itemize}
+あたりのことです。
+つまり、$g$は「$\mathbb{R}$と和がなす群」から「区間$(0,+\infty)$と積がなす群」への群準同型になっているということです。
+
+また、$\log(x^p)=p\log(x)$において$x=g(1)$を代入すると
+\begin{align*}
+  \log(g(1)^p)=p\log(g(1))=p
+\end{align*}
+$g$にこの値を代入すると、
+\[
+  g(p)=g(\log(g(1)^p))=g(1)^p
+\]
+となります。
+この等式は任意の$p\in\mathbb{R}$に対して成り立つから、$g(x)$の値は$g(1)$の値のみによって決まると言えます。
+そこで
+\begin{definition}
+  実数$e:=g(1)$を\textbf{自然対数の底}または\textbf{ネイピア数}などと呼ぶ。
+\end{definition}
+\noindent
+ことにすると、
+\[
+  g(x)=e^x
+\]
+と書くことができます。
+
+あと気になることは
+\begin{itemize}
+  \item $e^x$は連続か？
+  \item $e^x$は微分可能か？できるとしたらどうなる？
+\end{itemize}
+あたりだと思います。
+まずは連続であることを気合で示します。
+\begin{theorem}
+  $e^x$は連続関数である。
+\end{theorem}
+\begin{proof}
+  任意の$a\in\mathbb{R}$に対して、
+  \[
+    \lim_{x\to a}e^x=e^a
+  \]
+  を示したい。任意の$\varepsilon>0$に対して、
+  \[
+    \delta:=\log(1+\varepsilon e^{-a})
+  \]
+  とおけば、
+  \begin{align*}
+    &|x-a|<\delta\\
+    \iff&-\log(1+\varepsilon e^{-a})<x-a<\log(1+\varepsilon e^{-a})\\
+    \iff&\log\frac1{1+\varepsilon e^{-a}}<x-a<\log(1+\varepsilon e^{-a})\\
+    \iff&\frac1{1+\varepsilon e^{-a}}<e^{x-a}<1+\varepsilon e^{-a}\\
+    \iff&\frac1{1+\varepsilon e^{-a}}-1<e^{x-a}-1<\varepsilon e^{-a}\\
+    \iff&-\frac{\varepsilon e^{-a}}{1+\varepsilon e^{-a}}<e^{x-a}-1<\varepsilon e^{-a}\\
+    \implies&-\varepsilon e^{-a}<e^{x-a}-1<\varepsilon e^{-a}\\
+    \iff&|e^{x-a}-1|<\varepsilon e^{-a}
+  \end{align*}
+  です\footnote{
+    下から2つ目の$\implies$では、$1+\varepsilon e^{-a}>1$すなわち$1/(1+\varepsilon e^{-a})<1$ゆえに$-1/(1+\varepsilon e^{-a})>-1$であることを使っています。
+  }。
+  さらに両辺に$e^a$を掛ければ
+  \[
+    e^a|e^{x-a}-1|=|e^x-e^a|<\varepsilon
+  \]
+  が成り立ちます。
+  すなわち
+  \[
+    \lim_{x\to a}e^x=e^a
+  \]
+  です。
+\end{proof}
+
+連続性を使って、微分を求めましょう。
+そのためには
+\[
+  \lim_{h\to0}\frac{e^{x+h}-e^x}{h}
+\]
+が存在するかどうかを調べる必要があるのですが、
+\[
+  \frac{e^{x+h}-e^x}{h}=e^x\frac{e^h-1}{h}
+\]
+なので、
+\[
+  \lim_{h\to0}\frac{e^h-1}{h}
+\]
+を求めれば分かります\footnote{
+  これは$e^x$の$x=0$における微分係数に他ならないです。
+}。
+
+直感的には、まず$h=\log(1+k)$と変換すると、
+\[
+  \lim_{h\to0}\frac{e^h-1}{h}=\lim_{k\to0}\frac{k}{\log(1+k)}
+\]
+です。
+一方で対数関数の定義から
+\[
+  (\log(x))'(x=1)=\frac{1}{1}=1
+\]
+なので、微分係数の定義に戻れば
+\[
+  1=\lim_{k\to0}\frac{\log(1+k)-\log(1)}{k}=\lim_{k\to0}\frac{\log(1+k)}{k}
+\]
+ゆえに、逆数の極限
+\[
+  \lim_{h\to0}\frac{e^h-1}{h}=\lim_{k\to0}\frac{k}{\log(1+k)}
+\]
+も1になるでしょう。
+気合を入れて証明します。
+\begin{theorem}
+  \[
+    \lim_{h\to0}\frac{e^h-1}{h}=1
+  \]
+  ゆえに、任意の$x\in\mathbb{R}$に対して
+  \[
+    (e^x)'=e^x
+  \]
+\end{theorem}
+\begin{proof}
+  $\varepsilon>0$を任意の正の実数とする。
+  \[
+    (\log(x))'(x=1)=1
+  \]
+  であるから、ある$\delta_1>0$が存在して、$0<|k|<\delta_1$のとき
+  \[
+    \left|\frac{\log(1+k)}{k}-1\right|<\min\left\{\frac12,\frac{\varepsilon}{2}\right\}
+  \]
+  を満たす。このとき、
+  \begin{align*}
+    &\left|\frac{\log(1+k)}{k}-1\right|<\min\left\{\frac12,\frac{\varepsilon}{2}\right\}\\
+    \iff&1-\min\left\{\frac12,\frac{\varepsilon}{2}\right\}<\frac{\log(1+k)}{k}<1+\min\left\{\frac12,\frac{\varepsilon}{2}\right\}\\
+    \implies&\frac12<\frac{\log(1+k)}{k}<\frac32\\
+    \implies&\left|\frac{\log(1+k)}{k}\right|>\frac12
+  \end{align*}
+  であるから、
+  \begin{align*}
+    \left|\frac{k}{\log(1+k)}-1\right|=\frac{|1-\frac1k\log(1+k)|}{|\frac1k\log(1+k)|}<2\left|1-\frac{\log(1+k)}{k}\right|\leq\varepsilon
+  \end{align*}
+  また、この$\delta_1>0$に対して、$e^x$は連続関数であるから
+  \[
+    \lim_{h\to0}e^h=e^0=e^{\log(1)}=1
+  \]
+  ゆえ、ある$\delta_2>0$が存在して、$0<|h|<\delta_2$ならば
+  \[
+    |e^h-1|<\delta_1
+  \]
+  を満たす。
+  \[
+    k=e^h-1 \iff h=\log(1+k)
+  \]
+  とおくと、$0<|h|<\delta_2$ならば$0<|k|=|e^h-1|<\delta_1$であり\footnote{
+    $k=0 \iff e^h=1 \iff \log(e^h)=\log(1) \iff h=0$に注意です。
+  }、
+  \begin{align*}
+    \left|\frac{e^h-1}{h}-1\right|=\left|\frac{k}{\log(1+k)}-1\right|<\varepsilon
+  \end{align*}
+\end{proof}
+
+指数関数の重要な性質をまとめると以下のようになります。
+\begin{itemize}
+  \item $e^0=1$
+  \item $e^{x+y}=e^xe^y$
+  \item $e^{-x}=1/e^x$
+  \item $(e^x)^y=e^{xy}$
+  \item $(e^x)'=e^x$
+\end{itemize}
+
+このように指数関数には、微分しても姿を変えないという著しい性質があります。
+これを読み替えれば、指数関数の原始関数も自分自身です(積分定数の違いを除いて)。
+\[
+  \int e^x dx = e^x + C
+\]
+
+\section{実数べき関数の定義とその微積分}
+
+有理数$n\in\mathbb{Q}$に対して、
+\begin{align*}
+  &(x^n)'=nx^{n-1}\\
+  &\int x^n dx = \begin{cases}
+    \frac{x^{n+1}}{n+1} + C & n\neq-1\\
+    \log(x) + C & n=-1
+  \end{cases}
+\end{align*}
+がここまでで分かっています。
+これを$n\in\mathbb{R}$まで拡張しましょう。
+
+\subsection{実数べき関数の定義と性質}
+
+まず今更なのですが、実数$n$に対する$x^n$の定義がまだです。
+僕たちの立場では、$n$に収束する有理数列$\{\alpha_m\}_{m=1}^\infty$を取るとき、
+\[
+  x^n=\lim_{m\to\infty}x^{\alpha_m}
+\]
+が成り立つようにしたいところです。
+また、指数法則$x^{n+m}=x^nx^m$が成り立つようにしたいところです。
+ここで指数関数や対数関数の連続性を使った、賢い方法があります。
+\begin{definition}
+  $n\in\mathbb{R}\setminus\{0\}$に対して、関数
+  \[
+    (0,+\infty)\to\mathbb{R};x\mapsto e^{n\log(x)}
+  \]
+  を$x^n$と書く。
+\end{definition}
+
+指数法則を証明しましょう。
+\begin{theorem}
+  任意の$n,m\in\mathbb{R}$と$x>0$に対して、
+  \[
+    x^{n+m}=x^nx^m
+  \]
+\end{theorem}
+\begin{proof}
+  \[x^{n+m}=e^{(n+m)\log(x)}=e^{n\log(x)+m\log(x)}=e^{n\log(x)}e^{m\log(x)}=x^nx^m\]
+\end{proof}
+
+また、$x^n$の「$n$に関する連続性」も証明できます。
+\begin{theorem}
+  任意の$n\in\mathbb{R}\setminus\{0\}$と、$n$に収束する有理数列$\{\alpha_m\}_{m=1}^{+\infty}$に対して、
+  \[
+    x^n=\lim_{m\to+\infty}x^{\alpha_m}
+  \]
+  が成り立つ。
+\end{theorem}
+\begin{proof}
+  $e^x$の連続性より、
+  \[\lim_{m\to+\infty}x^{\alpha_m}=\lim_{m\to+\infty}e^{\alpha_m\log(x)}=e^{n\log(x)}=x^n\]
+\end{proof}
+
+これで$x^n=e^{n\log(x)}$という定義の妥当性も理解できたと思います。
+微分や積分についても、計算問題にすぎませんが証明していきます。
+\begin{theorem}
+  任意の$n\in\mathbb{R}\setminus\{0\}$と$x>0$に対して、
+  \[(x^n)'=nx^{n-1}\]
+\end{theorem}
+\begin{proof}
+  合成関数の微分、および、微分の線形性より
+  \[
+    (x^n)'=(e^{n\log(x)})'=(n\log(x))'e^{n\log(x)}=\frac{n}{x}x^n=nx^{n-1}
+  \]
+\end{proof}
+
+\begin{theorem}
+  任意の$n\in\mathbb{R}\setminus\{0,-1\}$と$x>0$に対して、
+  \[\int x^n dx=\frac{x^{n+1}}{n+1}+C\]
+\end{theorem}
+\begin{proof}
+  右辺を微分すれば明らか。
+\end{proof}
+
+\subsection{$x^n$の定義域について}
+
