@@ -139,11 +139,11 @@ $x>0$に対して
 $f:(0,+\infty)\to\mathbb{R}$は特に単射です。
 実は全射でもあることが、次の補題から理解できます。
 \begin{lemma}
-  任意の有理数$a>0$と実数$x>0$に対して、
+  任意の有理数$a$と実数$x>0$に対して、
   \[
     f(x^a)=af(x)
   \]
-  が成り立つ
+  が成り立つ。
 \end{lemma}
 \begin{proof}
   合成関数の微分から
@@ -218,10 +218,10 @@ $f:(0,+\infty)\to\mathbb{R}$は特に単射です。
 \begin{itemize}
   \item $(0,+\infty)$から$\mathbb{R}$への単調増加かつ全射な関数
   \item $(\log(x))'=1/x$ (${}^\forall x>0$)
-  \item $\log(x^p)=p\log(x)$ (${}^\forall x>0$, ${}^\forall p\in\mathbb{R}$)
+  \item $\log(x^a)=a\log(x)$ (${}^\forall x>0$, ${}^\forall a\in\mathbb{Q}$)
   \item $\log(1)=0$
   \item $\log(xy)=\log(x)+\log(y)$ (${}^\forall x,y>0$)
-  \item $\log(1/x)=-\log(x)$ ($\log(x^p)=p\log(x)$において$p=-1$とする)
+  \item $\log(1/x)=-\log(x)$ ($\log(x^a)=a\log(x)$において$a=-1$とする)
 \end{itemize}
 後半3つは、$\log$が、「区間$(0,+\infty)$と積がなす群」から「$\mathbb{R}$と和がなす群」への群準同型になっていることを意味します。
 微積分とはあまり関係のなさそうな性質ではありますが、ものごとはいろんな見方ができた方が、悪いってことはないです。
@@ -249,26 +249,29 @@ $f:(0,+\infty)\to\mathbb{R}$は特に単射です。
 あたりのことです。
 つまり、$g$は「$\mathbb{R}$と和がなす群」から「区間$(0,+\infty)$と積がなす群」への群準同型になっているということです。
 
-また、$\log(x^p)=p\log(x)$において$x=g(1)$を代入すると
+また、$a\in\mathbb{Q}$に対して$\log(x^a)=a\log(x)$が成り立っていたので、$x=g(1)$を代入すると
 \begin{align*}
-  \log(g(1)^p)=p\log(g(1))=p
+  \log(g(1)^a)=a\log(g(1))=a
 \end{align*}
 $g$にこの値を代入すると、
 \[
-  g(p)=g(\log(g(1)^p))=g(1)^p
+  g(a)=g(\log(g(1)^a))=g(1)^a
 \]
 となります。
-この等式は任意の$p\in\mathbb{R}$に対して成り立つから、$g(x)$の値は$g(1)$の値のみによって決まると言えます。
+この等式は任意の$a\in\mathbb{Q}$に対して成り立つから、$g(x)$の$x\in\mathbb{Q}$での値は$g(1)$の値のみによって決まると言えます。
 そこで
 \begin{definition}
   実数$e:=g(1)$を\textbf{自然対数の底}または\textbf{ネイピア数}などと呼ぶ。
 \end{definition}
 \noindent
-ことにすると、
+ことにして、任意の$x\in\mathbb{R}$に対して
 \[
-  g(x)=e^x
+  e^x:=\exp(x):=g(x)
 \]
-と書くことができます。
+と書きます\footnote{
+  まだ実数の「無理数乗」を定義していないので、任意の$x\in\mathbb{R}$に対して$e\in\mathbb{R}$の$e^x$というのを見た目通りに解釈することは、まだできません。
+  $e^x$は現状、既に存在が保証されている関数$g(x)$の別名にすぎないことに注意です。
+}。
 
 あと気になることは
 \begin{itemize}
@@ -300,19 +303,18 @@ $g$にこの値を代入すると、
     \implies&-\varepsilon e^{-a}<e^{x-a}-1<\varepsilon e^{-a}\\
     \iff&|e^{x-a}-1|<\varepsilon e^{-a}
   \end{align*}
-  です\footnote{
+  となる\footnote{
     下から2つ目の$\implies$では、$1+\varepsilon e^{-a}>1$すなわち$1/(1+\varepsilon e^{-a})<1$ゆえに$-1/(1+\varepsilon e^{-a})>-1$であることを使っています。
   }。
   さらに両辺に$e^a$を掛ければ
   \[
     e^a|e^{x-a}-1|=|e^x-e^a|<\varepsilon
   \]
-  が成り立ちます。
+  が成り立つ。
   すなわち
   \[
     \lim_{x\to a}e^x=e^a
   \]
-  です。
 \end{proof}
 
 連続性を使って、微分を求めましょう。
@@ -400,44 +402,49 @@ $g$にこの値を代入すると、
   \end{align*}
 \end{proof}
 
-指数関数の重要な性質をまとめると以下のようになります。
+指数関数の重要な性質をまとめると以下のようになります\footnote{
+  $(e^x)^y=e^{xy}$も成り立ちますが、現在は$(e^x)^y$が任意の$y\in\mathbb{R}$に対して定義されていないので証明不可能です。
+}。
 \begin{itemize}
   \item $e^0=1$
   \item $e^{x+y}=e^xe^y$
   \item $e^{-x}=1/e^x$
-  \item $(e^x)^y=e^{xy}$
   \item $(e^x)'=e^x$
 \end{itemize}
 
-このように指数関数には、微分しても姿を変えないという著しい性質があります。
+特に指数関数には、微分しても姿を変えないという著しい性質があります。
 これを読み替えれば、指数関数の原始関数も自分自身です(積分定数の違いを除いて)。
 \[
   \int e^x dx = e^x + C
 \]
 
+
+
 \section{実数べき関数の定義とその微積分}
 
-有理数$n\in\mathbb{Q}$に対して、
-\begin{align*}
-  &(x^n)'=nx^{n-1}\\
-  &\int x^n dx = \begin{cases}
-    \frac{x^{n+1}}{n+1} + C & n\neq-1\\
-    \log(x) + C & n=-1
-  \end{cases}
-\end{align*}
-がここまでで分かっています。
-これを$n\in\mathbb{R}$まで拡張しましょう。
+対数関数
+\[
+  \log(x):=\int_1^x \frac1\xi d\xi
+\]
+の逆関数として、指数関数
+\[
+  e^x
+\]
+が定義でき、しかも微分可能かつ微分可能であることが示せました。
+これによって「実数の無理数乗」を自然に定義することができます。
 
 \subsection{実数べき関数の定義と性質}
 
-まず今更なのですが、実数$n$に対する$x^n$の定義がまだです。
-僕たちの立場では、$n$に収束する有理数列$\{\alpha_m\}_{m=1}^\infty$を取るとき、
+まず任意の$x\in\mathbb{R}$に対して、既に$e^x$が定義されています。
+また
+\begin{align*}
+  e^{\log(x)}=x
+\end{align*}
+だったのと、まだ証明できていない
 \[
-  x^n=\lim_{m\to\infty}x^{\alpha_m}
+  (e^x)^y=e^{xy}
 \]
-が成り立つようにしたいところです。
-また、指数法則$x^{n+m}=x^nx^m$が成り立つようにしたいところです。
-ここで指数関数や対数関数の連続性を使った、賢い方法があります。
+との整合性を考えれば、次のように定義するのが良いでしょう。
 \begin{definition}
   $n\in\mathbb{R}\setminus\{0\}$に対して、関数
   \[
@@ -446,7 +453,20 @@ $g$にこの値を代入すると、
   を$x^n$と書く。
 \end{definition}
 
-指数法則を証明しましょう。
+こうであれば、保留していた次の主張を証明できます。
+\begin{theorem}
+  任意の$x,y\in\mathbb{R}$に対して、
+  \[
+    (e^x)^y=e^{xy}
+  \]
+\end{theorem}
+\begin{proof}
+  \[
+    (e^x)^y=\exp(y\log(e^x))=\exp(yx)=e^{xy}
+  \]
+\end{proof}
+
+また、この記法を用いるからには以下の指数法則が成り立ちます。
 \begin{theorem}
   任意の$n,m\in\mathbb{R}$と$x>0$に対して、
   \[
@@ -492,4 +512,103 @@ $g$にこの値を代入すると、
 \end{proof}
 
 \subsection{$x^n$の定義域について}
+
+上記の通り、任意の$n\in\mathbb{R}$に対して$x^n$は$x>0$で定義できます。
+整数でない有理数$n$については、例えば$\sqrt{-1}$などは実数にならないため$x>0$で定義されるとみるのが普通です。
+一方で、自然数$n>0$に対しては$x^n$は任意の$x\in\mathbb{R}$に対して定義できます。
+負の整数$n<0$については、0除算を回避するため$x\neq0$で定義されます。
+
+実は一番ややこしいのは$n=0$の時です。
+$x\neq0$なら$x^0=1$なので、連続性の観点でみれば任意の$x\in\mathbb{R}$に対して、$x^0=1$となりそうです。
+しかし、$x=0$のほうを固定して$n\neq0$が0に近づくことを考えると、
+\[
+  \lim_{n\to0}0^n=\lim_{n\to0}0=0
+\]
+となります。
+つまり、連続性を保つべきという観点で見れば、
+\[
+  0^0
+\]
+がうまく定義されないのです。
+\begin{example}
+  \begin{align*}
+    &\lim_{n\to+\infty}e^{-n}=0\\
+    &\lim_{n\to+\infty}\frac1{n}=0\\
+    &\lim_{n\to+\infty}\frac1{n^2}=0
+  \end{align*}
+  であるが、
+  \begin{align*}
+    &\lim_{n\to+\infty}(e^{-n})^{1/n}=\lim_{n\to+\infty}e^{-1}=\frac1e\\
+    &\lim_{n\to+\infty}(e^{-n})^{1/n^2}=\lim_{n\to+\infty}e^{-1/n}=e^0=1
+  \end{align*}
+\end{example}
+こうした事情もあり、どの文脈であっても$x^n$の定義域には気を付けるべきです。
+常に定義域を明記するべきでしょう。
+
+\subsection{一般の底の指数関数と対数関数}
+
+上記のように$x$を固定して$n$を変数とみる関数$x^n$を考えることがあります。
+見やすいように
+\[
+  a^x
+\]
+というものを考えるのです。
+これを指数関数というのですが、
+\begin{align*}
+  a^x=(e^{\log(a)})^x=e^{x\log(a)}
+\end{align*}
+なので、これでもってそのまま定義としちゃいましょう。
+\begin{definition}
+  $a>0$に対して、
+  \[
+    a^x:\mathbb{R}\to\mathbb{R};x\mapsto e^{x\log(a)}
+  \]
+  を、\textbf{$a$を底とする指数関数}という。
+\end{definition}
+
+この定義によれば、$a>0$を底とする指数関数は微分可能な関数の合成関数ですから、次の主張が簡単に示せます。
+\begin{theorem}
+  任意の$a>0$、$x\in\mathbb{R}$に対して、
+  \[
+    (a^x)'=a^x\log(a)
+  \]
+\end{theorem}
+\begin{proof}
+  合成関数の微分より
+  \[
+    (a^x)'=(e^{x\log(a)})'=(x\log(a))'e^{x\log(a)}=\log(a)\cdot a^x=a^x\log(a)
+  \]
+\end{proof}
+
+次に$a^x$の値域について調べましょう。
+僕たちの定義によれば、最終的に$e^x$に合成するので、$a^x$の値域は正の実数です。
+逆に$a\neq1\iff\log(a)\neq0$のとき、任意の正の実数$y$に対して、$x=\log(y)/\log(a)$とすれば
+\[
+  a^x=e^{x\log(a)}=e^{\log(y)}=y
+\]
+ゆえ、$a^x$は$\mathbb{R}$から$(0,+\infty)$への全射です。
+さらに上記の微分から、$\log(a)$の符号によって単調増加・単調減少がかわります。
+ただし$\log(a)=0 \iff a=1$のときは$a^x$は常に1を返す定値関数です。
+以上をまとめて
+\begin{theorem}
+  任意の$a>0$と$x\in\mathbb{R}$に対して、$a^x>0$。
+  また
+  \begin{itemize}
+    \item $a>1$のとき、$a^x$は単調増加
+    \item $a=1$のとき、$a^x$は$1$への定値関数
+    \item $0<a<1$のとき、$a^x$は単調減少
+  \end{itemize}
+  特に$a>0$かつ$a\neq1$のとき、$a^x$は$\mathbb{R}$から$(0,+\infty)$への全単射である。
+\end{theorem}
+
+しれっと流しましたが、上の議論で$a>0$かつ$a\neq1$のときに、$a^x$の逆関数を構成していました。
+\begin{definition}
+  $a>0$、$a\neq1$に対して、
+  \[
+    \log_a(x):(0,+\infty)\to\mathbb{R};x\mapsto\frac{\log(x)}{\log(a)}
+  \]
+  を、\textbf{$a$を底とする対数関数}という。
+\end{definition}
+
+
 
