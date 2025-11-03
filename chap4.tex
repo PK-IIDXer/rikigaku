@@ -105,7 +105,7 @@ $a$からの微小変化$\Delta t$の大きさに比例して、$v_0$の係数�
   \[
     \lim_{|\Delta|\to0}\sum_{i=0}^n f(c_i)(x_{i+1}-x_i)
   \]
-  が、$c_0,\dots,c_n$の選び方によらず収束するとき、関数$f$は$[a,t]$で\textbf{積分可能}であるといい、極限
+  が、$c_i\in[x_i,x_{i+1}]$の選び方によらず収束するとき、関数$f$は$[a,t]$で\textbf{積分可能}であるといい、極限
   \[
     \int_a^tf(x)dx:=\lim_{|\Delta|\to0}\sum_{i=0}^n f(c_i)(x_{i+1}-x_i)
   \]
@@ -118,23 +118,58 @@ $a$からの微小変化$\Delta t$の大きさに比例して、$v_0$の係数�
   関数$f$が閉区間$[a,t]$で連続ならば、その閉区間で$f$は積分可能である。
 \end{theorem}
 \begin{proof}
-  TODO: 一様連続だから。
+  閉区間$[a,t]$の任意の分割$\Delta=\{x_0,\dots,x_{n+1}\}$に対して、各閉区間$[x_i,x_{i+1}]$はコンパクトゆえ、$f$は$[x_i,x_{i+1}]$で最大値$M_i$と最小値$m_i$を持つ。
+  そこで
+  \begin{align*}
+    U(f,\Delta):=&\sum_{i=0}^n M_i(x_{i+1}-x_i)\\
+    L(f,\Delta):=&\sum_{i=0}^n m_i(x_{i+1}-x_i)\\
+  \end{align*}
+  を考える。
+  $M_i,m_i$が$[x_i,x_{i+1}]$における$f$の最大値・最小値であることから、どの$c_i\in[x_i,x_{i+1}]$をとっても
+  \[
+    L(f,\Delta)\leq\sum_{i=0}^n f(c_i)(x_{i+1}-x_i)\leq U(f,\Delta)
+  \]
+  が成り立つ。
+  よって、$U(f,\Delta)-L(f,\Delta)\to0$ as $|\Delta|\to0$を証明すればよい。
+
+  $f$は閉区間$[a,t]$で連続なので、一様連続。
+  従って、任意の$\varepsilon>0$に対して、ある$\delta>0$が存在して、
+  \[
+    |x-y|<\delta \implies |f(x)-f(y)|<\frac{\varepsilon}{b-a}
+  \]
+  を満たす。
+  $|\Delta|<\delta$となるようにとれば、任意の$i=0,\dots,n$に対して、$x_{i+1}-x_i\leq|\Delta|<\delta$ゆえ、
+  \[
+    M_i-m_i=\max(f([x_i,x_{i+1}]))-\min(f([x_i,x_{i+1}]))<\frac{\varepsilon}{b-a}
+  \]
+  よって
+  \begin{align*}
+    U(f,\Delta)-L(f,\Delta)&=\sum_{i=0}^n (M_i-m_i)(x_{i+1}-x_i)\\
+    &<\sum_{i=0}^n\frac{\varepsilon}{b-a}(x_{i+1}-x_i)\\
+    &=\frac{\varepsilon}{b-a}\sum_{i=0}^n(x_{i+1}-x_i)\\
+    &=\frac{\varepsilon}{b-a}(b-a)\\
+    &=\varepsilon
+  \end{align*}
+  すなわち$U(f,\Delta)-L(f,\Delta)\to0$ as $|\Delta|\to0$
 \end{proof}
 
-もともと「微分して$\dot\gamma(t)=v_0$となる$\gamma$を求めたい」ということでここまで進めてきました。
+もともと「$\dot\gamma(t)=v_0$となる$\gamma$を求めたい」ということでここまで進めてきました。
 実際、しっかりこれを証明することができます。
 \begin{theorem}
-  微分積分学の基本定理
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  このとき、任意の$a\in I$に対して、$\int_a^x f(\xi)d\xi$は微分可能な$I$上の関数であり、
+  \[
+    \frac{d}{dx}\int_a^x f(\xi)d\xi=f(x)
+  \]
+  を満たす。
 \end{theorem}
-\begin{proof}
-  TODO
-\end{proof}
 \begin{corollary}
   $F:[a,b]\to\mathbb{R}$を$C^1$級関数とし、$f:=F'$とする。このとき
   \[
     \int_a^b f(x)dx=F(b)-F(a)
   \]
 \end{corollary}
+これの証明は本章の内容とは独立なので、次章に回します。
 
 微分積分学の基本定理によって、ある関数$f$の積分を求めるためには、微分して$f$になる関数$F$を求めれば良いことがわかりました。
 つまり、積分は微分の逆演算であるということです。

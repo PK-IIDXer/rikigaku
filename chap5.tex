@@ -3,13 +3,6 @@
 
 \section{積分の基本性質}
 
-積分の定義から分かる性質を述べていきます。
-その前に前章でしれっと証明してサラッと流した次の事実は重要なので、ここに掲示しておきましょう。
-\begin{theorem}
-  $I$を区間、$f:I\to\mathbb{R}$を微分可能な関数で、$f'(x)=0$ (${}^\forall x\in I$)を満たすとする。
-  このとき、$f$は定値関数である。
-\end{theorem}
-
 \subsection{積分の線形性}
 
 \begin{theorem}
@@ -39,6 +32,102 @@
   \]
   となります。$C$は積分定数です。
 \end{example}
+
+\subsection{積分の大小関係}
+
+関数の大小関係によって、積分結果の大小関係が保存されます。
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  
+\end{theorem}
+
+%%積分の定義から分かる性質を述べていきます。
+%%その前に前章でしれっと証明してサラッと流した次の事実は重要なので、ここに掲示しておきましょう。
+%%\begin{theorem}
+%%  $I$を区間、$f:I\to\mathbb{R}$を微分可能な関数で、$f'(x)=0$ (${}^\forall x\in I$)を満たすとする。
+%%  このとき、$f$は定値関数である。
+%%\end{theorem}
+
+\subsection{微分積分学の基本定理}
+
+前章でほったらかしていた、微分積分学の基本定理を証明しましょう。
+そのために、まずは積分に関する平均値の定理を証明します。
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+
+\end{theorem}
+
+\begin{theorem}[微分積分学の基本定理]
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  このとき、任意の$a\in I$に対して、$\int_a^x f(\xi)d\xi$は微分可能な$I$上の関数であり、
+  \[
+    \frac{d}{dx}\int_a^x f(\xi)d\xi=f(x)
+  \]
+  を満たす。
+\end{theorem}
+\begin{proof}
+  まず$a,c,b\in I$が$a<c<b$を満たすとする。
+  このとき$[a,b]$の分割として
+  \[
+    \Delta:=\{x_0,\dots,x_j,\dots,x_m\},\quad x_j=c
+  \]
+  となるようにとり
+  \[
+    \sum_{k=1}^mf(\xi_k)(\xi_k-\xi_{k-1})=\sum_{k=1}^jf(\xi_k)(\xi_k-\xi_{k-1})+\sum_{k=j+1}^mf(\xi_k)(\xi_k-\xi_{k-1})
+  \]
+  において、$|\Delta|\to0$の極限を考えることで
+  \[
+    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
+  \]
+  が得られる。
+
+  さて、
+  \[
+    F(x):=\int_a^x f(\xi)d\xi=f(x)
+  \]
+  とおき、
+  \[
+    \frac{F(x+h)-F(x)}{h}
+  \]
+  を評価すると、$h>0$のとき($h<0$のときも同様である)、
+  \[
+    F(x+h)-F(x)=\int_a^{x+h} f(\xi) d\xi+\int_a^x f(\xi)d\xi=\int_x^{x+h}f(\xi)d\xi
+  \]
+  である。よって、積分に関する平均値の定理より、ある$x<\xi'<x+h$が存在して、
+  \[
+    \frac{F(x+h)-F(x)}{h}=f(\xi')
+  \]
+  これに対して$h\to0$の極限を取れば題意を得る。
+\end{proof}
+
+証明の中でしれっと示した次の主張は重要です。
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  さらに$a,c,b\in I$が$a<c<b$を満たすとする。
+  このとき、
+  \[
+    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
+  \]
+\end{theorem}
+
+次の定理も微分積分学の基本公式と呼ばれます。
+\begin{corollary}
+  $F:[a,b]\to\mathbb{R}$を$C^1$級関数とし、$f:=F'$とする。このとき
+  \[
+    \int_a^b f(x)dx=F(b)-F(a)
+  \]
+\end{corollary}
+\begin{proof}
+  原始関数を、適当に$c\in I$をとって
+  \[
+    F(x)=\int_c^xf(\xi)d\xi+C
+  \]
+  とおく。
+  このとき、
+  \[
+    F(b)-F(a)=\int_c^b f(\xi)d\xi + \int_c^af(\xi)d\xi=\int_a^bf(\xi)d\xi
+  \]
+\end{proof}
 
 \subsection{部分積分}
 
