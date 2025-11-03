@@ -3,6 +3,46 @@
 
 \section{積分の基本性質}
 
+\subsection{積分範囲を繋ぐ}
+
+以下の積分範囲を繋ぐような操作はよく使います。
+\begin{theorem}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  さらに$a,c,b\in I$が$a<c<b$を満たすとする。
+  このとき、
+  \[
+    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
+  \]
+\end{theorem}
+\begin{proof}
+  まず$a,c,b\in I$が$a<c<b$を満たすとする。
+  このとき$[a,b]$の分割として
+  \[
+    \Delta:=\{x_0,\dots,x_j,\dots,x_m\},\quad x_j=c
+  \]
+  となるようにとり
+  \[
+    \sum_{k=1}^mf(\xi_k)(\xi_k-\xi_{k-1})=\sum_{k=1}^jf(\xi_k)(\xi_k-\xi_{k-1})+\sum_{k=j+1}^mf(\xi_k)(\xi_k-\xi_{k-1})
+  \]
+  において、$|\Delta|\to0$の極限を考えることで
+  \[
+    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
+  \]
+  が得られる。
+\end{proof}
+\begin{corollary}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
+  任意の$a,b\in I$に対して
+  \[
+    \int_a^bf(x)dx=-\int_b^af(x)dx
+  \]
+\end{corollary}
+\begin{proof}
+  \[
+    \int_a^bf(x)dx+\int_b^af(x)dx=\int_a^af(x)dx=0
+  \]
+\end{proof}
+
 \subsection{積分の線形性}
 
 \begin{theorem}
@@ -37,25 +77,60 @@
 
 関数の大小関係によって、積分結果の大小関係が保存されます。
 \begin{theorem}
-  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
-  
+  $I$を区間、$f,g:I\to\mathbb{R}$を連続関数とする。
+  $I$上常に$f(x)\leq g(x)$ならば、
+  \[
+    \int_a^b f(x)\leq\int_a^b g(x)dx
+  \]
+  また、$I$上恒等的に$f(x)=g(x)$ではない場合に限り
+  \[
+    \int_a^b f(x)<\int_a^b g(x)dx
+  \]
 \end{theorem}
+\begin{proof}
+  積分の線形性から、$f(x)\geq0$ならば
+  \[
+    \int_a^bf(x)dx\geq0
+  \]
+  を示せばよいが、これは定積分の定義から明らか。
 
-%%積分の定義から分かる性質を述べていきます。
-%%その前に前章でしれっと証明してサラッと流した次の事実は重要なので、ここに掲示しておきましょう。
-%%\begin{theorem}
-%%  $I$を区間、$f:I\to\mathbb{R}$を微分可能な関数で、$f'(x)=0$ (${}^\forall x\in I$)を満たすとする。
-%%  このとき、$f$は定値関数である。
-%%\end{theorem}
+  $f(x)$が常に0ではない場合、ある$c\in I$が存在して、$f(c)>0$。
+  $f$は連続だから、ある$\delta>0$が存在して、$|x-c|<\delta$を満たす任意の$x$に対して$f(x)>0$。
+  よって
+  \[
+    \int_a^bf(x)dx=\int_a^{c-\delta}f(x)dx+\int_{c-\delta}^{c+\delta}f(x)dx+\int_{c+\delta}^bf(x)dx\geq\int_{c-\delta}^{c+\delta}f(x)dx>0
+  \]
+\end{proof}
 
 \subsection{微分積分学の基本定理}
 
 前章でほったらかしていた、微分積分学の基本定理を証明しましょう。
 そのために、まずは積分に関する平均値の定理を証明します。
-\begin{theorem}
-  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
-
+\begin{theorem}[積分の平均値の定理]
+  $I=[a,b]$を閉区間、$f:I\to\mathbb{R}$を連続関数とする。
+  このとき、ある$c\in(a,b)$が存在して、
+  \[
+    \frac1{b-a}\int_a^bf(x)dx=f(c)
+  \]
 \end{theorem}
+\begin{proof}
+  $f$は閉区間$[a,b]$上連続なので、最大値・最小値の定理より、最大値$M=f(x_0)$と最小値$m=f(y_0)$をもつ。
+  $M=m$の場合は定理は自明なので、$M\neq m$とする。
+  このとき、$m\leq f(x) \leq M$なので、
+  \begin{align*}
+    &m(b-a)=\int_a^bmdx\leq\int_a^b f(x)dx\leq\int_a^bMdx=M(b-a)\\
+    \iff&m\leq\frac1{b-a}\int_a^bf(x)\leq M
+  \end{align*}
+  また、$M\neq m$ゆえ、恒等的に$m=f(x)$または$M=f(x)$ではないから、
+  \[
+    m<\frac1{b-a}\int_a^bf(x)< M
+  \]
+  が成り立つ。ゆえに中間値の定理より
+  \[
+    \frac1{b-a}\int_a^bf(x)dx=f(c)
+  \]
+  となる$c\in(a,b)$が存在する。
+\end{proof}
 
 \begin{theorem}[微分積分学の基本定理]
   $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
@@ -66,22 +141,6 @@
   を満たす。
 \end{theorem}
 \begin{proof}
-  まず$a,c,b\in I$が$a<c<b$を満たすとする。
-  このとき$[a,b]$の分割として
-  \[
-    \Delta:=\{x_0,\dots,x_j,\dots,x_m\},\quad x_j=c
-  \]
-  となるようにとり
-  \[
-    \sum_{k=1}^mf(\xi_k)(\xi_k-\xi_{k-1})=\sum_{k=1}^jf(\xi_k)(\xi_k-\xi_{k-1})+\sum_{k=j+1}^mf(\xi_k)(\xi_k-\xi_{k-1})
-  \]
-  において、$|\Delta|\to0$の極限を考えることで
-  \[
-    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
-  \]
-  が得られる。
-
-  さて、
   \[
     F(x):=\int_a^x f(\xi)d\xi=f(x)
   \]
@@ -99,16 +158,6 @@
   \]
   これに対して$h\to0$の極限を取れば題意を得る。
 \end{proof}
-
-証明の中でしれっと示した次の主張は重要です。
-\begin{theorem}
-  $I$を区間、$f:I\to\mathbb{R}$を連続関数とする。
-  さらに$a,c,b\in I$が$a<c<b$を満たすとする。
-  このとき、
-  \[
-    \int_a^bf(x)dx=\int_a^c f(x)dx + \int_c^bf(x)dx
-  \]
-\end{theorem}
 
 次の定理も微分積分学の基本公式と呼ばれます。
 \begin{corollary}
@@ -158,6 +207,20 @@
     \int_a^b f(x)g'(x)dx=\{f(b)g(b)-f(a)g(a)\}-\int_a^b f'(x)g(x)dx
   \]
 \end{theorem}
+
+上の定理における$\{f(b)g(b)-f(a)g(a)\}$の部分は、
+\[
+  \int_a^b(fg)'(x)dx
+\]
+に他ならないのですが、通常通り次のように書くことも多いです。
+\begin{definition}
+  $I$を区間、$f:I\to\mathbb{R}$を連続関数、$a,b\in I$とする。
+  $F$を$f$の原始関数とするとき、$[a,b]$上の定積分を
+  \[
+    \int_a^bf(x)dx=[F(x)]_a^b
+  \]
+  と書く。
+\end{definition}
 
 \subsection{置換積分}
 
