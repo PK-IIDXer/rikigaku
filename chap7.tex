@@ -71,3 +71,130 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
 空気抵抗のおかげで、人間のたんぱく質を貫かない程度の勢いにとどめてくれているんですね。
 
 
+
+\section{ばね運動と三角関数}
+
+\subsection{ばね運動の運動方程式}
+
+次のような運動方程式を考えます。
+\begin{example}
+  $\gamma:I\to\mathbb{R}$に対して、
+  \begin{itemize}
+    \item $m\ddot{\gamma}=-k\gamma$ ($k>0$)
+    \item $\gamma(0)=1$
+    \item $\dot\gamma(0)=0$ ($\omega>0$)
+  \end{itemize}
+  これを満たす$\gamma$を求めよ。
+\end{example}
+
+これは通常の運動方程式で、僕たちが解かねばならないタイプの方程式です。
+物理的な状況としては、\textbf{ばねについた質点を、位置1で静かに手を離した}という状況です。
+空気抵抗を無視しているので、ずっとビョンビョンするのです。
+物理的には解$\gamma(t)=C(t)$が存在しそうですが、もう少しちゃんと議論する必要がありそうです。
+
+まず簡単のため、運動方程式
+\[
+  \ddot{\gamma}(t)=-\gamma(t)
+\]
+を考えます。愚直にこれを積分すると、
+\[
+  \int_0^t\ddot{\gamma}(\tau)d\tau=-\int_0^t\gamma(\tau)d\tau
+\]
+となります。左辺は微分積分学の基本定理より
+\[
+  \int_0^t\ddot{\gamma}(\tau)d\tau\dot{\gamma}(t)-\dot\gamma(0)=\dot{\gamma}(t)
+\]
+ゆえ、
+\[
+  \dot{\gamma}(t)=-\int_0^t\gamma(\tau)d\tau
+\]
+さらに積分して、
+\[
+  \gamma(t)-1=-\int_0^t\int_0^{\tau}\gamma(\tau_1)d\tau_1d\tau
+\]
+従って、積分方程式と呼ばれるものの一つである次の方程式が得られます。
+\[
+  \gamma(t)=1-\int_0^t\int_0^{\tau}\gamma(\tau_1)d\tau_1d\tau
+\]
+これでは方程式が解けたのかどうかが分かりません。
+筋が悪そうだからやめよう…などとは思わず、あきらめなかった男がピカールでした。
+いったんこの右辺を
+\[
+  \gamma_1(t):=1-\int_0^t\int_0^{\tau}\gamma(\tau_1)d\tau_1d\tau
+\]
+とおきます。
+さらに、$\gamma_1(t)$を積分方程式の右辺にぶちこんで、
+\[
+  \gamma_2(t):=1-\int_0^t\int_0^{\tau}\gamma_1(\tau_1)d\tau_1d\tau
+\]
+以下同様に、
+\[
+  \gamma_n(t):=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau
+\]
+が得られます。
+
+これについて考察を深めるために、具体的にいくつか計算してみましょう。
+\begin{align*}
+  \gamma_2(t)&=1-\int_0^t\int_0^{\tau}\gamma_1(\tau_1)d\tau_1d\tau\\
+  &=1-\int_0^t\int_0^{\tau}\left[1-\int_0^{\tau_1}\int_0^{\tau_2}\gamma(\tau_3)d\tau_3d\tau_2\right]d\tau_1d\tau\\
+  &=1-\frac{t^2}{2}+\int_0^t\int_0^{\tau}\int_0^{\tau_1}\int_0^{\tau_2}\gamma(\tau_3)d\tau_3d\tau_2d\tau_1d\tau
+\end{align*}
+\begin{align*}
+  \gamma_3(t)&=1-\int_0^t\int_0^{\tau}\gamma_2(\tau_1)d\tau_1d\tau\\
+  &=1-\int_0^t\int_0^\tau\left[1-\frac{\tau_1^2}{2}+\int_0^{\tau_1}\int_0^{\tau_2}\int_0^{\tau_3}\int_0^{\tau_4}\gamma(\tau_5)d\tau_5d\tau_4d\tau_3d\tau_2\right]d\tau_1d\tau\\
+  &=1-\frac{t^2}{2}+\frac{t^4}{4!}-\int_0^t\int_0^\tau\int_0^{\tau_1}\int_0^{\tau_2}\int_0^{\tau_3}\int_0^{\tau_4}\gamma(\tau_5)d\tau_5d\tau_4d\tau_3d\tau_2d\tau_1d\tau
+\end{align*}
+
+目ざとい人には、これが$\cos$の級数表示になっていくことが理解できると思います。
+しかし、今はまだ$\cos$が定義されていないことに注意してください。
+僕たちはむしろ、$\ddot{\gamma}=-\gamma$の解として再定義しようとしているのです！
+そのためには$\gamma_n$が、ある関数に収束することを証明しなければなりません。
+このとき非常に扱いに困るのが、たくさん積分が並んでいる項
+\[
+  \int_0^t\int_0^\tau\int_0^{\tau_1}\int_0^{\tau_2}\int_0^{\tau_3}\int_0^{\tau_4}\gamma(\tau_5)d\tau_5d\tau_4d\tau_3d\tau_2d\tau_1d\tau
+\]
+などです。
+\textbf{僕たちはこれを、思い切って無きものと思いましょう！}
+どうやればそう思えるかというと、先ほど定義した関数列
+\[
+  \gamma_n(t):=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau
+\]
+に対して、初期条件
+\[
+  \gamma_0(t)=0
+\]
+を課したものと考えます。
+そして、極限
+\[
+  \gamma(t):=\lim_{n\to+\infty}\gamma_n(t)
+\]
+が存在し、これが微分可能かつ微分方程式
+\[
+  \ddot{\gamma}(t)=-\gamma(t)
+\]
+の解になっていることを確認できれば良いでしょう。
+
+\subsection{$\gamma_n(t)$の"各点"収束}
+
+$t\in\mathbb{R}$を固定すれば、関数列$\{\gamma_n(t)\}$はただの数列ですので、コーシーの収束判定法を使えます。
+そこで、$\varepsilon>0$を任意の正の実数とします。
+$|\gamma_n(t)-\gamma_m(t)|$を評価していきます。
+$n\geq m>0$のとき、
+\begin{align*}
+  |\gamma_n(t)-\gamma_m(t)|&=\left|\int_0^t\int_0^\tau\gamma_{n-1}(\tau_1)d\tau_1d\tau-\int_0^t\int_0^\tau\gamma_{m-1}(\tau_1)d\tau_1d\tau\right|\\
+  &=\left|\int_0^t\int_0^\tau\{\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)\}d\tau_1d\tau\right|\\
+  &\leq\int_0^t\int_0^\tau|\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)|d\tau_1d\tau
+\end{align*}
+ここから再帰的に不等式を連ねることができますね。
+いけるところまでやっちまいましょう。
+\begin{align*}
+  |\gamma_n(t)-\gamma_m(t)|&\leq\int_0^t\int_0^\tau|\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)|d\tau_1d\tau\\
+  &\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\int_0^{\tau_2}|\gamma_{n-2}(\tau_3)-\gamma_{m-2}(\tau_3)|d\tau_3d\tau_2d\tau_1d\tau\\
+  &\cdots\\
+  &\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\cdots\int_0^{\tau_{2m-2}}|\gamma_{n-m}(\tau_{2m-1})-\gamma_0(\tau_{2m-1})|d\tau_{2m-1}\cdots d\tau_1d\tau
+\end{align*}
+$\gamma_0(t)=0$だったので、結局
+\[
+  |\gamma_n(t)-\gamma_m(t)|\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\cdots\int_0^{\tau_{2m-2}}|\gamma_{n-m}(\tau_{2m-1})|d\tau_{2m-1}\cdots d\tau_1d\tau
+\]
+が分かりました。
