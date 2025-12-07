@@ -1,5 +1,6 @@
+# Dockerfile
+
 FROM aruneko/texlive:latest
-COPY entrypoint.sh /entrypoint.sh
-COPY .latexmkrc /.latexmkrc
-RUN ["chmod", "+x", "/entrypoint.sh"]
-ENTRYPOINT [ "/entrypoint.sh" ]
+
+# 以下の COPY 行を削除（またはコメントアウト）してください
+# COPY .latexmkrc /work/
