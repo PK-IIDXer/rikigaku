@@ -6,93 +6,28 @@
 
 
 
-\section{空気抵抗ありの自由落下}
-
-自由落下は、どちら向きに重力が働いているかによりますが、運動方程式は
-\[
-  m\ddot{\gamma}=(0,0,mg)
-\]
-で表されます。明らかに一次元での運動になるので、初めから$\gamma$は一次元の値をとるとし、
-\[
-  m\ddot{\gamma}=mg
-\]
-を考えましょう。
-
-空気抵抗があるとき、それは$\gamma$の速さに比例する力が加わりそうという予感がします。
-車の窓を開け、手を伸ばしてみると、車が速ければ速いほど、強い力を手に感じることができます\footnote{そんなことしちゃダメだぞ。}。
-従って、自由落下の運動方程式を次のように変えるのが良さそうです。
-\[
-  m\ddot{\gamma}=mg-k\dot{\gamma}
-\]
-$k>0$は比例定数です。
-$k$は、定性的な結果があっていれば、観測事実から後から決める実数です。
-いったん、速度がわかればよいという観点から
-\[
-  v(t):=\dot{\gamma}(t)
-\]
-とおくと、運動方程式は
-\[
-  \frac{dv}{dt}=g-\frac{k}{m}v
-\]
-となります。
-
-突然ですが、このように何かの未知関数の微分が絡んだ方程式を、\textbf{微分方程式}といいます。
-微分方程式の解法第一号は、今回使える\textbf{変数分離法}です。
-$g-\frac{k}{m}v\neq0$の範囲で、
-\begin{align*}
-  \frac{dv}{dt}=g-\frac{k}{m}v &\iff \frac{1}{g-kv/m}\frac{dv}{dt}=1
-\end{align*}
-この両辺を$t$で積分するのですが、右辺は簡単に$t+C$になりますね。
-左辺は、合成関数の積分を使って
-\begin{align*}
-  \int \frac{1}{g-kv/m}\frac{dv}{dt}dt &= \int \frac{1}{g-kv/m}dv\\
-  &=-\frac{m}{k}\log(g-kv/m)
-\end{align*}
-です。僕は暗算でこれくらいはできちゃいますが、どうやっているかというと「大体こういう感じになるだろうな」と目星をつけて、あとは適当に係数を決めてるだけです。
-
-もとい。まとめて
-\[
-  -\frac{m}{k}\log(g-kv/m)=t+C \iff  g-\frac{k}{m}v(t)=A\exp\left(-\frac{kt}{m}\right) \iff v(t)=\frac{mg}{k}-\frac{mA}{k}\exp\left(-\frac{kt}{m}\right)
-\]
-と求めることができます。
-積分定数$A$は、例えば自由落下するボールを「静かに落とした」という初期条件$v(0)=0$を課すとすると、
-\[
-  0=\frac{mg}{k}-\frac{mA}{k} \quad \therefore \; A=g
-\]
-と求まるので、空気抵抗付きの自由落下ボールの運動は
-\[
-  v(t)=\frac{mg}{k}\left\{1-\exp\left(-\frac{kt}{m}\right)\right\}
-\]
-で記述できるというわけです。
-
-$t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束します。
-自由落下ボールの速度も、十分な時間を掛ければ$v=mg/k$に急速に近づいていきます。
-例えば雨粒が雲の高さから空気抵抗を無視して地表に落ちてくると、とんでもないスピードで落ちてきます。
-空気抵抗のおかげで、人間のたんぱく質を貫かない程度の勢いにとどめてくれているんですね。
-
-
-
 \section{ばね運動と三角関数}
 
-\subsection{ばね運動の運動方程式}
-
-次のような運動方程式を考えます。
+ばねは、引っ張ると縮む方向に力が働き、押し込むと伸びる方向に力が働きます。
+これをニュートン力学の観点でモデル化すると、ばねの伸び$\gamma(t)$に対して次のような運動方程式が成り立つと考えられます。
 \begin{example}
   $\gamma:I\to\mathbb{R}$に対して、
   \begin{itemize}
     \item $m\ddot{\gamma}=-k\gamma$ ($k>0$)
     \item $\gamma(0)=1$
-    \item $\dot\gamma(0)=0$ ($\omega>0$)
+    \item $\dot\gamma(0)=0$
   \end{itemize}
   これを満たす$\gamma$を求めよ。
 \end{example}
 
-これは通常の運動方程式で、僕たちが解かねばならないタイプの方程式です。
+非常に典型的な運動ですので、僕たちが解かねばならないタイプの方程式です。
 物理的な状況としては、\textbf{ばねについた質点を、位置1で静かに手を離した}という状況です。
 空気抵抗を無視しているので、ずっとビョンビョンするのです。
-物理的には解$\gamma(t)=C(t)$が存在しそうですが、もう少しちゃんと議論する必要がありそうです。
+物理的な直感からすると、解$\gamma(t)$が存在しそうですが、もう少しちゃんと議論する必要がありそうです。
 
-まず簡単のため、運動方程式
+\subsection{ばね運動のピカール逐次近似}
+
+まず簡単のため、$k=1$の場合の運動方程式
 \[
   \ddot{\gamma}(t)=-\gamma(t)
 \]
@@ -102,7 +37,7 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
 \]
 となります。左辺は微分積分学の基本定理より
 \[
-  \int_0^t\ddot{\gamma}(\tau)d\tau\dot{\gamma}(t)-\dot\gamma(0)=\dot{\gamma}(t)
+  \int_0^t\ddot{\gamma}(\tau)d\tau=\dot{\gamma}(t)-\dot\gamma(0)=\dot{\gamma}(t)
 \]
 ゆえ、
 \[
@@ -117,7 +52,8 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
   \gamma(t)=1-\int_0^t\int_0^{\tau}\gamma(\tau_1)d\tau_1d\tau
 \]
 これでは方程式が解けたのかどうかが分かりません。
-筋が悪そうだからやめよう…などとは思わず、あきらめなかった男がピカールでした。
+普通の人はここで「筋が悪そうだからやめよう…」などと思って匙を投げそうなところを、ピカールという人はあきらめなかったようです。
+
 いったんこの右辺を
 \[
   \gamma_1(t):=1-\int_0^t\int_0^{\tau}\gamma(\tau_1)d\tau_1d\tau
@@ -127,6 +63,7 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
 \[
   \gamma_2(t):=1-\int_0^t\int_0^{\tau}\gamma_1(\tau_1)d\tau_1d\tau
 \]
+という関数を作ります。
 以下同様に、
 \[
   \gamma_n(t):=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau
@@ -147,8 +84,8 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
 
 目ざとい人には、これが$\cos$の級数表示になっていくことが理解できると思います。
 しかし、今はまだ$\cos$が定義されていないことに注意してください。
-僕たちはむしろ、$\ddot{\gamma}=-\gamma$の解として再定義しようとしているのです！
-そのためには$\gamma_n$が、ある関数に収束することを証明しなければなりません。
+僕たちはむしろ、$\ddot{\gamma}=-\gamma$の解として$\cos$を再定義しようとしているのです。
+そのためには$\gamma_n$が、ある関数に一意的に収束することを証明しなければなりません。
 このとき非常に扱いに困るのが、たくさん積分が並んでいる項
 \[
   \int_0^t\int_0^\tau\int_0^{\tau_1}\int_0^{\tau_2}\int_0^{\tau_3}\int_0^{\tau_4}\gamma(\tau_5)d\tau_5d\tau_4d\tau_3d\tau_2d\tau_1d\tau
@@ -159,9 +96,9 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
 \[
   \gamma_n(t):=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau
 \]
-に対して、初期条件
+に対して、初項
 \[
-  \gamma_0(t)=0
+  \gamma_1(t)=1
 \]
 を課したものと考えます。
 そして、極限
@@ -173,28 +110,165 @@ $t$が十分大きいとき、$e^{-\alpha t}$はかなり急速に0に収束し�
   \ddot{\gamma}(t)=-\gamma(t)
 \]
 の解になっていることを確認できれば良いでしょう。
+このような手法を\textbf{ピカールの逐次近似}といいます。
+
+\subsection{$\gamma_n(t)$を求める}
+
+\[
+  \begin{cases}
+    \gamma_n(t)=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau\\
+    \gamma_1(t)=1
+  \end{cases}
+\]
+のもとで、$\gamma_n(t)$を求めていきます。
+先ほどほとんど答えは出ていたのですが、この漸化式で表わされた関数を一般項っぽくまとめましょう。
+
+まず、$\gamma_2(t)$は次のように求められます。
+\[
+  \gamma_2(t)=1-\int_0^t\int_0^{\tau}1d\tau_1d\tau=1-\int_0^t\tau d\tau=1-\frac{t^2}{2}
+\]
+
+次に$\gamma_3(t)$は
+\begin{align*}
+  \gamma_3(t)&=1-\int_0^t\int_0^{\tau}\left(1-\frac{\tau_1^2}{2}\right)d\tau_1d\tau\\
+  &=1-\int_0^t\left(\tau-\frac{\tau_1^3}{2\cdot3}\right)d\tau\\
+  &=1-\frac{t^2}{2}+\frac{t^4}{2\cdot3\cdot4}
+\end{align*}
+
+もうお分かりでしょうが、気持ちがいいのでもう一回やりますか。
+\begin{align*}
+  \gamma_4(t)&=1-\int_0^t\int_0^{\tau}\left(1-\frac{\tau_1^2}{2}+\frac{\tau_1^4}{2\cdot3\cdot4}\right)d\tau_1d\tau\\
+  &=1-\int_0^t\left(\tau-\frac{\tau^3}{2\cdot3}+\frac{\tau^5}{2\cdots5}\right)d\tau\\
+  &=1-\frac{t^2}{2}+\frac{t^4}{4!}-\frac{t^6}{6!}
+\end{align*}
+
+このようにして、次の予想が立ちます。
+\begin{lemma}
+  \[
+    \begin{cases}
+      \gamma_n(t)=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau\\
+      \gamma_1(t)=1
+    \end{cases}
+  \]
+  を満たす関数$\gamma_n(t)$は、各$n$に対して
+  \[
+    \gamma_n(t)=\begin{cases}
+      1 & (n=1) \\
+      1+\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!} & (n>1)
+    \end{cases}
+  \]
+  である\footnote{
+    この場合分けは、$t=0$のときに不定形$0^0$が現れるのを避けるために行っています。
+  }。
+\end{lemma}
+\begin{proof}
+  帰納法により証明する。
+  $n=1$のときは自明。
+  $n>1$とする。
+  このとき、
+  \[
+    \gamma_n(t)=1+\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!}
+  \]
+  を
+  \[
+    1-\int_0^t\int_0^{\tau}\gamma_{n}(\tau_1)d\tau_1d\tau
+  \]
+  に代入すれば、
+  \begin{align*}
+    &1-\int_0^t\int_0^{\tau}\gamma_{n}(\tau_1)d\tau_1d\tau\\
+    =&1-\int_0^t\int_0^{\tau}\left(1+\sum_{k=1}^{n-1}(-1)^k\frac{\tau_1^{2k}}{(2k)!}\right)d\tau_1d\tau\\
+    =&1-\int_0^t\left(\tau+\sum_{k=1}^{n-1}(-1)^k\frac{\tau^{2k+1}}{(2k+1)\cdot(2k)!}\right)d\tau\\
+    =&1-\frac{t^2}{2}-\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k+2}}{(2k)(2k+1)\cdot(2k)!}\\
+    =&1-\frac{t^2}{2}-\sum_{k=2}^{n}(-1)^{k-1}\frac{t^{2k+2}}{(2k)(2k+1)\cdot(2k)!}\\
+    =&1-\frac{t^2}{2}+\sum_{k=2}^{n}(-1)^{k}\frac{t^{2k}}{(2k)!}\\
+    =&1+\sum_{k=1}^{n}(-1)^{k}\frac{t^{2k}}{(2k)!}\\
+  \end{align*}
+  が得られる。これは帰納法の一歩先の$\gamma_{n+1}(t)$を意味する。
+\end{proof}
 
 \subsection{$\gamma_n(t)$の"各点"収束}
 
-$t\in\mathbb{R}$を固定すれば、関数列$\{\gamma_n(t)\}$はただの数列ですので、コーシーの収束判定法を使えます。
-そこで、$\varepsilon>0$を任意の正の実数とします。
-$|\gamma_n(t)-\gamma_m(t)|$を評価していきます。
-$n\geq m>0$のとき、
+$t\in\mathbb{R}$を固定して関数列$\{\gamma_n(t)\}$の収束を示すために、コーシーの収束判定法を目指して$|\gamma_n(t)-\gamma_m(t)|$を評価します。
+$t=0$のとき収束性は自明なので、以下$t\neq0$とします。
+
+まず$n>m>0$に対して、三角不等式より
 \begin{align*}
-  |\gamma_n(t)-\gamma_m(t)|&=\left|\int_0^t\int_0^\tau\gamma_{n-1}(\tau_1)d\tau_1d\tau-\int_0^t\int_0^\tau\gamma_{m-1}(\tau_1)d\tau_1d\tau\right|\\
-  &=\left|\int_0^t\int_0^\tau\{\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)\}d\tau_1d\tau\right|\\
-  &\leq\int_0^t\int_0^\tau|\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)|d\tau_1d\tau
+  |\gamma_n(t)-\gamma_m(t)|&=\left|\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!}-\sum_{k=1}^{m-1}(-1)^k\frac{t^{2k}}{(2k)!}\right|=\left|\sum_{k=m}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!}\right|\leq\sum_{k=m}^{n-1}\frac{|t|^{2k}}{(2k)!}
 \end{align*}
-ここから再帰的に不等式を連ねることができますね。
-いけるところまでやっちまいましょう。
-\begin{align*}
-  |\gamma_n(t)-\gamma_m(t)|&\leq\int_0^t\int_0^\tau|\gamma_{n-1}(\tau_1)-\gamma_{m-1}(\tau_1)|d\tau_1d\tau\\
-  &\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\int_0^{\tau_2}|\gamma_{n-2}(\tau_3)-\gamma_{m-2}(\tau_3)|d\tau_3d\tau_2d\tau_1d\tau\\
-  &\cdots\\
-  &\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\cdots\int_0^{\tau_{2m-2}}|\gamma_{n-m}(\tau_{2m-1})-\gamma_0(\tau_{2m-1})|d\tau_{2m-1}\cdots d\tau_1d\tau
-\end{align*}
-$\gamma_0(t)=0$だったので、結局
+となります。
+したがって僕たちの目標は、任意の$\varepsilon>0$に対してある自然数$N$が存在し、$n>m>N$ならば
 \[
-  |\gamma_n(t)-\gamma_m(t)|\leq\int_0^t\int_0^\tau\int_0^{\tau_1}\cdots\int_0^{\tau_{2m-2}}|\gamma_{n-m}(\tau_{2m-1})|d\tau_{2m-1}\cdots d\tau_1d\tau
+  \sum_{k=m}^{n-1}\frac{|t|^{2k}}{(2k)!}<\varepsilon
 \]
-が分かりました。
+となることを示す問題に帰着されました。
+
+ここで感覚として持ってほしいのは、「階乗はべき乗よりも圧倒的に速く増加する（逆数は速く減少する）」ということです。
+そのため、階乗が分母に来ているこの級数は、十分に先の方では等比級数で上から抑えられることが期待できます。
+公比 $r \in (0,1)$ の公比級数は
+\[
+  \sum_{k=0}^n r^k < \sum_{k=0}^\infty r^k = \frac{1}{1-r}
+\]
+と定数で抑えられるため、収束性の証明にはうってつけです。
+
+目当ての級数の隣り合う項の比を調べてみます。
+\[
+  \frac{|t|^{2k+2}/(2k+2)!}{|t|^{2k}/(2k)!}=\frac{|t|^2}{(2k+2)(2k+1)}
+\]
+$t\in\mathbb{R}$は固定されていますが、自然数$k$はいくらでも大きくできます。
+また分母の$(2k+2)(2k+1)$は$k>0$で単調増加し、無限大に発散します。
+そこで自然数$K$を、
+\[
+  k \geq K \implies (2k+2)(2k+1) > 2|t|^2
+\]
+を満たすように十分大きく取れば、
+\[
+  \frac{|t|^{2k+2}}{(2k+2)!} < \frac12\cdot \frac{|t|^{2k}}{(2k)!} \quad (k \geq K)
+\]
+が成り立ちます。
+これを利用して、$n > m \geq K$ の範囲で和を評価します。
+各項は前の項の半分未満になるので、
+\begin{align*}
+  \sum_{k=m}^{n-1}\frac{|t|^{2k}}{(2k)!} 
+  &= \frac{|t|^{2m}}{(2m)!} + \frac{|t|^{2m+2}}{(2m+2)!} + \cdots + \frac{|t|^{2n-2}}{(2n-2)!} \\
+  &< \frac{|t|^{2m}}{(2m)!} \left( 1 + \frac{1}{2} + \frac{1}{4} + \cdots \right) \\
+  &= \frac{|t|^{2m}}{(2m)!} \cdot 2
+\end{align*}
+となります。
+さらに、この先頭の項 $\frac{|t|^{2m}}{(2m)!}$ 自体も、$m$ が大きくなれば $0$ に収束することを示しましょう。
+先ほどの比の評価式を $m-1, m-2, \dots, K$ と繰り返し適用することで、
+\[
+  \frac{|t|^{2m}}{(2m)!} < \frac{1}{2}\frac{|t|^{2m-2}}{(2m-2)!} < \cdots < \left(\frac{1}{2}\right)^{m-K}\frac{|t|^{2K}}{(2K)!}
+\]
+が得られます。これらを合わせると、
+\[
+  \sum_{k=m}^{n-1}\frac{|t|^{2k}}{(2k)!} < 2 \cdot \left(\frac{1}{2}\right)^{m-K}\frac{|t|^{2K}}{(2K)!} = \frac{1}{2^{m-K-1}} \cdot \frac{|t|^{2K}}{(2K)!}
+\]
+となります。
+右辺において、$t$ と $K$ は定数であり、$m \to \infty$ とすると $0$ に収束します。
+したがって、任意の $\varepsilon > 0$ に対して、ある $N$ （ただし $N \geq K$）を十分大きく取れば、
+$m > N$ ならば右辺が $\varepsilon$ 未満になるようにできます。
+
+これが僕たちが欲しかった $N$ です。
+
+少し込み入ってしまったので、ここで $N$ の依存関係を整理しておきましょう。
+\begin{enumerate}
+  \item $t\in\mathbb{R}$ は固定されています。
+  \item 自然数 $K$ を、$k \ge K$ ならば比が $1/2$ 未満になるように取ります。
+  具体的には $(2K+2)(2K+1) > 2|t|^2$ を満たす必要があります。
+  \textbf{$K$ の取り方は $|t|$ に依存して大きくなります。}
+  \item 自然数 $N$ は、残差が $\varepsilon$ を下回るように取ります。
+  具体的には $N \approx \log_2(1/\varepsilon) + \text{const.}(K, t)$ の形になります。
+  \textbf{$N$ の取り方は $K$ に依存しており、従って $|t|$ に依存しています。}
+\end{enumerate}
+
+ともかく、どの $t\in\mathbb{R}$ をとってきても、級数
+\[
+  \gamma(t) := \lim_{n\to\infty}\gamma_n(t) = 1+\sum_{k=1}^{\infty}(-1)^k\frac{t^{2k}}{(2k)!}
+\]
+は収束することが示されました。
+
+\subsection{$\gamma(t)$は微分方程式を満たすか？}
+
+\subsection{解の一意性}
+
+\subsection{$\cos$と$\sin$の定義と性質}

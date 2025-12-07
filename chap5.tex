@@ -1,9 +1,7 @@
 
-\chapter{積分の基礎}
+\chapter{積分の基本性質}
 
-\section{積分の基本性質}
-
-\subsection{積分範囲を繋ぐ}
+\section{積分範囲を繋ぐ}
 
 以下の積分範囲を繋ぐような操作はよく使います。
 \begin{theorem}
@@ -43,8 +41,9 @@
   \]
 \end{proof}
 
-\subsection{積分の線形性}
+\section{積分の線形性}
 
+積分は、以下の意味で\textbf{線形性}をもちます。
 \begin{theorem}
   $I$を区間、$f,g:I\to\mathbb{R}$を連続関数、$a,b\in\mathbb{R}$とする。
   このとき、連続関数$af+bg:I\to\mathbb{R}$の不定積分に関して、以下が成り立つ。
@@ -73,18 +72,19 @@
   となります。$C$は積分定数です。
 \end{example}
 
-\subsection{積分の大小関係}
+\section{積分の単調性と三角不等式}
 
 関数の大小関係によって、積分結果の大小関係が保存されます。
+これは積分の\textbf{単調性}と呼ばれます。
 \begin{theorem}
   $I$を区間、$f,g:I\to\mathbb{R}$を連続関数とする。
   $I$上常に$f(x)\leq g(x)$ならば、
   \[
-    \int_a^b f(x)\leq\int_a^b g(x)dx
+    \int_a^b f(x)dx\leq\int_a^b g(x)dx
   \]
   また、$I$上恒等的に$f(x)=g(x)$ではない場合に限り
   \[
-    \int_a^b f(x)<\int_a^b g(x)dx
+    \int_a^b f(x)dx<\int_a^b g(x)dx
   \]
 \end{theorem}
 \begin{proof}
@@ -102,7 +102,30 @@
   \]
 \end{proof}
 
-\subsection{微分積分学の基本定理}
+積分に関する大小関係の保存則から、積分に関する\textbf{三角不等式}と呼ばれる以下の定理が導かれます。
+\begin{corollary}
+  $[a,b]$を区間、$f:[a,b]\to\mathbb{R}$を連続関数とする。
+  このとき
+  \[
+    \left|\int_a^b f(x)dx\right|\leq\int_a^b |f(x)|dx
+  \]
+\end{corollary}
+\begin{proof}
+  一般に、任意の$x\in[a,b]$に対して
+  \[
+    -|f(x)|\leq f(x)\leq |f(x)|
+  \]
+  ゆえにそれぞれ積分すれば、積分の単調性より
+  \[
+    -\int_a^b|f(x)|dx\leq\int_a^bf(x)dx\leq\int_a^b|f(x)|dx
+  \]
+  すなわち
+  \[
+    \left|\int_a^b f(x)dx\right|\leq\int_a^b |f(x)|dx
+  \]
+\end{proof}
+
+\section{微分積分学の基本定理}
 
 前章でほったらかしていた、微分積分学の基本定理を証明しましょう。
 そのために、まずは積分に関する平均値の定理を証明します。
@@ -178,7 +201,7 @@
   \]
 \end{proof}
 
-\subsection{部分積分}
+\section{部分積分}
 
 \begin{theorem}
   $I$を区間、$f,g:I\to\mathbb{R}$を可微分関数とする。
@@ -222,7 +245,7 @@
   と書く。
 \end{definition}
 
-\subsection{置換積分}
+\section{置換積分}
 
 \begin{theorem}
   $I,J$を区間、$u:I\to J$を可微分関数とする。
@@ -255,6 +278,3 @@
     \int_a^b f(u(t))\frac{du(t)}{dt}dt=\int_\alpha^\beta f(x)dx
   \]
 \end{theorem}
-
-
-
