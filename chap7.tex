@@ -138,7 +138,7 @@
 もうお分かりでしょうが、気持ちがいいのでもう一回やりますか。
 \begin{align*}
   \gamma_4(t)&=1-\int_0^t\int_0^{\tau}\left(1-\frac{\tau_1^2}{2}+\frac{\tau_1^4}{2\cdot3\cdot4}\right)d\tau_1d\tau\\
-  &=1-\int_0^t\left(\tau-\frac{\tau^3}{2\cdot3}+\frac{\tau^5}{2\cdots5}\right)d\tau\\
+  &=1-\int_0^t\left(\tau-\frac{\tau^3}{3!}+\frac{\tau^5}{5!}\right)d\tau\\
   &=1-\frac{t^2}{2}+\frac{t^4}{4!}-\frac{t^6}{6!}
 \end{align*}
 
@@ -146,7 +146,7 @@
 \begin{lemma}
   \[
     \begin{cases}
-      \gamma_n(t)=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau\\
+      \displaystyle \gamma_n(t)=1-\int_0^t\int_0^{\tau}\gamma_{n-1}(\tau_1)d\tau_1d\tau\\
       \gamma_1(t)=1
     \end{cases}
   \]
@@ -154,7 +154,7 @@
   \[
     \gamma_n(t)=\begin{cases}
       1 & (n=1) \\
-      1+\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!} & (n>1)
+      \displaystyle 1+\sum_{k=1}^{n-1}(-1)^k\frac{t^{2k}}{(2k)!} & (n>1)
     \end{cases}
   \]
   である\footnote{
@@ -234,7 +234,7 @@ $t\in\mathbb{R}$は固定されていますが、自然数$k$はいくらでも�
   &= \frac{|t|^{2m}}{(2m)!} \cdot 2
 \end{align*}
 となります。
-さらに、この先頭の項 $\frac{|t|^{2m}}{(2m)!}$ 自体も、$m$ が大きくなれば $0$ に収束することを示しましょう。
+さらに、この先頭の項 $|t|^{2m}/(2m)!$ 自体も、$m$ が大きくなれば $0$ に収束することを示しましょう。
 先ほどの比の評価式を $m-1, m-2, \dots, K$ と繰り返し適用することで、
 \[
   \frac{|t|^{2m}}{(2m)!} < \frac{1}{2}\frac{|t|^{2m-2}}{(2m-2)!} < \cdots < \left(\frac{1}{2}\right)^{m-K}\frac{|t|^{2K}}{(2K)!}
@@ -257,7 +257,7 @@ $m > N$ ならば右辺が $\varepsilon$ 未満になるようにできます。
   具体的には $(2K+2)(2K+1) > 2|t|^2$ を満たす必要があります。
   \textbf{$K$ の取り方は $|t|$ に依存して大きくなります。}
   \item 自然数 $N$ は、残差が $\varepsilon$ を下回るように取ります。
-  具体的には $N \approx \log_2(1/\varepsilon) + \text{const.}(K, t)$ の形になります。
+  具体的には $N \approx \log_2(1/\varepsilon) + \text{($K$, $t$に依存する定数)}$ の形になります。
   \textbf{$N$ の取り方は $K$ に依存しており、従って $|t|$ に依存しています。}
 \end{enumerate}
 
@@ -269,6 +269,113 @@ $m > N$ ならば右辺が $\varepsilon$ 未満になるようにできます。
 
 \subsection{$\gamma(t)$は微分方程式を満たすか？}
 
+次に、この関数が微分方程式
+\[
+  \ddot{\gamma}=-\gamma
+\]
+を満たすことを確認したいのですが、そのためには無限級数を「項ごとに微分」してよいか、すなわち
+\[
+  \frac{d}{dt}\left(\sum_{k=0}^\infty f_k(t)\right)\overset{?}{=}\sum_{k=0}^\infty \frac{df_k(t)}{dt}
+\]
+が成り立つかを検証しなければなりません。
+
+なぜこのように慎重に進めているかというと、今回のように極限で定義されている関数を微分するときは注意が必要だからです。
+実際、次のように「極限の微分」と「微分の極限」が一致しない例が存在します。
+
+\subsubsection*{微分と極限の入れ替えに関する注意}
+
+\[
+  S_n(x):=\frac{nx}{1+n^2x^2},\quad f(x):=\sum_{n=1}^\infty(S_n(x)-S_{n-1}(x))
+\]
+を考えてみましょう。
+
+$f(x)$の部分和は
+\[
+  f_n(x):=\sum_{k=1}^n(S_k(x)-S_{k-1}(x))=S_n(x)-S_0(x)=\frac{nx}{1+n^2x^2}
+\]
+なので、$x=0$ならば$f_n(x)=0\to0$ as $n\to\infty$。
+また、$x\neq0$ならば
+\[
+  f_n(x)=\frac{nx}{1+n^2x^2}=\frac{1}{\frac1{nx}+nx}\to0 \text{ as } n\to\infty
+\]
+これは分母が無限大に発散するためです。
+結局、実のところ
+\[
+  f(x)=\lim_{n\to\infty}f_n(x)=0
+\]
+であり、もちろん$f'(x)=0$です。
+
+逆に、各項を微分したものの級数を考えましょう。
+まず、$S_n(x)$の微分を計算すると
+\begin{align*}
+  S'_n(x)&=\frac{n(1+n^2x^2)-nx\cdot 2n^2x}{(1+n^2x^2)^2}=\frac{n(1-n^2x^2)}{(1+n^2x^2)^2}
+\end{align*}
+従って部分和は
+\[
+  \sum_{k=1}^n\frac{d}{dx}(S_k(x)-S_{k-1}(x))=S'_n(x)=\frac{n(1-n^2x^2)}{(1+n^2x^2)^2}
+\]
+となります。
+これが$n\to\infty$で$f'(x)=0$に収束するかというと、$x=0$のとき
+\[
+  \sum_{k=1}^n\left.\frac{d}{dx}(S_k(x)-S_{k-1}(x))\right|_{x=0}=S'_n(0)=n
+\]
+なので、明らかに収束しないです。
+
+\subsubsection*{今回の場合は微分と和を入れ替えできる}
+
+今回の場合、即ち
+\[
+  \gamma(t)=1+\sum_{n=1}^\infty(-1)^n\frac{t^{2n}}{(2n)!}
+\]
+の場合は、微分と和を入れ替えることができます。
+
+これを確かめるために、まず、形式的に項別微分して得られるはずの級数を$\sigma(t)$とおきます。
+\[
+  \sigma(t):=\sum_{k=1}^\infty(-1)^k\frac{d}{dt}\left(\frac{t^{2k}}{(2k)!}\right)=\sum_{k=1}^\infty(-1)^k\frac{t^{2k-1}}{(2k-1)!}
+\]
+この級数も、$\gamma(t)$と同様の議論で各点収束することが確認できます。
+
+僕たちが示したいのは、$\gamma(t)$の微分が本当に$\sigma(t)$になること、つまり
+\[
+  \lim_{h\to0}\left|\frac{\gamma(t+h)-\gamma(t)}{h}-\sigma(t)\right|=0
+\]
+です。
+
+議論すべき極限は二方向あって、
+\begin{enumerate}
+  \item $h\to\infty$の方向
+  \item $\displaystyle 1+\sum_{k=1}^n(-1)^{k}t^{2k}/(2k)!$の$n\to\infty$の方向
+\end{enumerate}
+
+これらです。それぞれで議論できるように、数式を分割していきます。
+\begin{align*}
+  &\left|\frac{\gamma(t+h)-\gamma(t)}{h}-\sigma(t)\right|\\
+  \leq&\left|\frac{\gamma(t+h)-\gamma(t)}{h}-\frac{\gamma_n(t+h)-\gamma_n(t)}{h}\right| + \left|\frac{\gamma_n(t+h)-\gamma_n(t)}{h}-\gamma_n'(t)\right| + \left|\gamma_n'(t)-\sigma(t)\right|
+\end{align*}
+
+
+
+\begin{comment}
+\subsection{一様収束という概念}
+
+さて、今の証明を振り返ってみましょう。 うまくいった最大の理由は、最後の不等式評価において
+\[
+  \sum|f_k''(\tau_k)|
+\]
+という部分が、$h$や$\tau_k$の細かい値によらず、\textbf{「ある定数 M で上からガツンと抑えられた」}点にあります。
+もし、この和が$h$の取り方によって無限大に発散してしまうような不安定な級数だったら、$h\to0$の極限をとることはできなかったでしょう。
+
+このように、変数が動く範囲全体において、級数が「一斉に、均一に」収束してくれる性質のことを\textbf{一様収束 (Uniform Convergence)} と呼びます。
+数学の厳密な体系では、「関数列が一様収束するならば、積分と極限を交換できる」「導関数が一様収束するならば、項別微分ができる」といった定理として整理されています。
+
+僕たちが扱っている$\gamma(t)$やその導関数たちは、階乗$(2k)!$のおかげで非常に収束が速く、任意の有界閉区間で一様収束するという非常に素直な（タチの良い）性質を持っています。
+だからこそ、安心して
+\[
+  \ddot{\gamma}(t)=-\gamma(t)
+\]
+という結論を導くことができたのです。
+
 \subsection{解の一意性}
 
 \subsection{$\cos$と$\sin$の定義と性質}
+\end{comment}
