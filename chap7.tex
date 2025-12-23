@@ -4,6 +4,23 @@
 僕たちの手の中にある道具といえば、多項式関数や指数関数・対数関数の微積分が自由に行えるぐらい。
 せめて三角関数さえあれば、もっと多くの微分方程式が解けるはずなのに…。
 
+ということで本章では三角関数を導入するのですが、高校数学のような直角三角形を用いた幾何的直観に基づく定義には、微分積分学の観点では一つ問題があります。
+それは、三角関数の微分が理路整然と計算できないことです。
+実際、例えば$\sin(x)$の$x=0$での微分係数を計算すると、
+\[
+  \lim_{h\to0}\frac{\sin(h)}{h}
+\]
+という極限を計算しないといけないのですが、これが難しくなります。
+高校時代は直角三角形・扇形の面積を比較することによって
+\[
+  \cos(h)<\frac{\sin(h)}{h}<1
+\]
+を示して挟み撃ちしたのですが、僕たちはまだ面積を定義してないのです。
+かといって面積の定義まで三角関数の微分ができないままかというと、それはそれで辛いし、後回しにするほど循環論法のリスクが高まって良くないです。
+
+これを回避するために、「解析入門」を冠する往年の教科書はおのおのの工夫を凝らしているのですが、僕たちはアールフォルスやルーディンのアプローチに近い、微分方程式の解として三角関数を導入しましょう。
+どこを軸足にするにしても序盤は難しいのですが、どこかをきっかけに良く知っている事実がボロボロと湧いて出てくるのが面白いですよ。
+
 
 
 \section{ばね運動と三角関数}
@@ -374,8 +391,168 @@ $f(x)$の部分和は
   \ddot{\gamma}(t)=-\gamma(t)
 \]
 という結論を導くことができたのです。
-
-\subsection{解の一意性}
-
-\subsection{$\cos$と$\sin$の定義と性質}
 \end{comment}
+
+\subsection{$\sin$の定義}
+
+関数$\cos(x)$を
+\[
+  \begin{cases}
+    \ddot{\gamma}=-\gamma\\
+    \gamma(0)=1\\
+    \dot\gamma(0)=0
+  \end{cases}
+\]
+を満たす関数$\gamma=\cos$として定義できました。
+すなわち
+\begin{align*}
+  \frac{d^2\cos(x)}{dx^2}&=-\cos(x)\\
+  \cos(0)&=1\\
+  \left.\frac{\cos(x)}{dx}\right|_{x=0}&=0
+\end{align*}
+です。
+
+一方で、
+\[
+  \ddot\gamma=-\gamma
+\]
+を満たす関数として、次のような\textbf{本質的に異なる解}を作ることができます。
+まず
+\[
+  \frac{d^2\cos(x)}{dx^2}=-\cos(x)
+\]
+だったので、両辺を微分すると
+\[
+  \frac{d^3\cos(x)}{dx^3}=-\frac{d\cos(x)}{dx}
+\]
+となります。
+そこで右辺を次のように定義します。
+\begin{definition}
+  \[
+    \sin(x):=-\frac{d\cos(x)}{dx}
+  \]
+\end{definition}
+このとき、
+\[
+  \frac{d^2\sin(x)}{dx^2}=-\frac{d^3\cos(x)}{dx^3}=\frac{d\cos(x)}{dx}=-\sin(x)
+\]
+ゆえに、$\sin(x)$もまた$\ddot\gamma=-\gamma$の解になっています。
+一方で$\sin$に関する初期条件は
+\begin{align*}
+  \sin(0)&=-\left.\frac{\cos(x)}{dx}\right|_{x=0}=0\\
+  \left.\frac{d\sin(x)}{dx}\right|_{x=0}&=-\left.\frac{d^2\cos(x)}{dx^2}\right|_{x=0}=\cos(0)=1
+\end{align*}
+ゆえに、$\sin$は
+\[
+  \begin{cases}
+    \ddot{\gamma}=-\gamma\\
+    \gamma(0)=0\\
+    \dot\gamma(0)=1
+  \end{cases}
+\]
+を満たす関数$\gamma=\sin$です。
+
+
+
+\section{三角関数の性質と円周率の定義}
+
+\subsection{相互法則}
+
+$\cos$を$\ddot\gamma=-\gamma$を満たす関数、$\sin$を$-(\cos(x))'$として定義しました。
+従って
+\begin{align*}
+  (\cos(x))'&=-\sin(x)\\
+  (\sin(x))'&=-(\cos(x))''=\cos(x)
+\end{align*}
+が成り立ちます。
+このことだけで、次のことがわかります。
+\begin{theorem}[三角関数の相互法則]
+  任意の$x\in\mathbb{R}$について
+  \[
+    \cos^2(x)+\sin^2(x)=1
+  \]
+\end{theorem}
+\begin{proof}
+  まず$f(x):=\cos^2(x)+\sin^2(x)$が定数関数であることを示す。
+  これは以下のように微分が消えることから分かる。
+  \[
+    \frac{d}{dx}(\cos^2(x)+\sin^2(x))=-2\cos(x)\sin(x)+2\sin(x)\cos(x)=0
+  \]
+  また、$f(0)=\cos^2(0)+\sin^2(0)=1$ゆえ、題意が成り立つ。
+\end{proof}
+
+\subsection{加法定理}
+
+微分方程式
+\[
+  \frac{d^2\gamma}{dx^2}=-\gamma
+\]
+は線形微分方程式になっていて、かつ$\cos,\sin$はともにこの解ですから、線形和
+\[
+  f(x):=A\cos(x)+B\sin(x),\quad A,B\in\mathbb{R}
+\]
+も$f''=-f$を満たします。
+この微分方程式の解として、$f$は初期条件
+\begin{align*}
+  f(0)&=A\\
+  f'(0)&=B
+\end{align*}
+を満たしています。
+
+一方で
+\[
+  g(x):=\cos(x+a),\quad a\in\mathbb{R}
+\]
+も、合成関数の微分から$\gamma''=-\gamma$の解になっています。
+この微分方程式の解として、$g$は初期条件
+\begin{align*}
+  g(0)&=\cos(a)\\
+  g'(0)&=-\sin(a)
+\end{align*}
+が成り立ちます。
+
+ゆえに微分方程式の解の一意性から、
+\begin{align*}
+  A&=\cos(a)\\
+  B&=-\sin(a)
+\end{align*}
+とすることで、以下が成り立ちます。
+\begin{theorem}[加法定理(cos)]
+  任意の$x,a\in\mathbb{R}$に対して、
+  \[
+    \cos(x+a)=\cos(x)\cos(a)-\sin(x)\sin(a)
+  \]
+\end{theorem}
+
+同様に
+\[
+  h(x):=\sin(x+b),\quad b\in\mathbb{R}
+\]
+も$\gamma''=-\gamma$の解であり、初期条件
+\begin{align*}
+  h(0)&=\sin(b)\\
+  h'(0)&=\cos(b)
+\end{align*}
+を満たすので、
+\begin{align*}
+  A&=\sin(b)\\
+  B&=\cos(b)
+\end{align*}
+とすることで、以下が得られます。
+\begin{theorem}[加法定理(sin)]
+  任意の$x,b\in\mathbb{R}$に対して、
+  \[
+    \sin(x+b)=\cos(x)\sin(b)+\sin(x)\cos(b)
+  \]
+\end{theorem}
+
+\subsection{円周率の定義}
+
+% TODO: 補題: 級数を途中で切った時の大小関係
+% TODO: 定理: [0,2]におけるcosの単調減少性(⇔-\sin(x)<0)
+% TODO: 定理: \cos(2)<0
+% TODO: 定義: \piは\cos(x_0)=0を満たす唯一の実数x_0\in[0,1]の2倍
+
+\subsection{周期性}
+
+
