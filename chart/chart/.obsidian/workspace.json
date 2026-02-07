@@ -1,0 +1,249 @@
+{
+  "main": {
+    "id": "514265882dc9e7dd",
+    "type": "split",
+    "children": [
+      {
+        "id": "8835532d2bba4fa4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "03aeab47bb00d5f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "関数/指数関数.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "指数関数"
+            }
+          }
+        ]
+      },
+      {
+        "id": "7f74f365242e61b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b4468ba216012298",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "グラフビュー"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "503ebbe08a9ec7d2",
+    "type": "split",
+    "children": [
+      {
+        "id": "49943dea40f26574",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "22a74b0b45003733",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "ファイルエクスプローラ"
+            }
+          },
+          {
+            "id": "165afa2494638bf9",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "\\gamma",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "検索"
+            }
+          },
+          {
+            "id": "a52514c08ed8d325",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "ブックマーク"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "278367605d346426",
+    "type": "split",
+    "children": [
+      {
+        "id": "8e7e5a7dd19b5f14",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e1810fd3ad5ba44d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "バックリンク"
+            }
+          },
+          {
+            "id": "48921bcc5e5eddf1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "アウトゴーイングリンク"
+            }
+          },
+          {
+            "id": "d074e2d2b7312277",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "タグ"
+            }
+          },
+          {
+            "id": "52a4671ec2812be4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "すべてのプロパティ"
+            }
+          },
+          {
+            "id": "9deb20c43f469921",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "アウトライン"
+            }
+          },
+          {
+            "id": "dc9721e268aa011d",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:クイックスイッチャーを開く": false,
+      "graph:グラフビューを開く": false,
+      "canvas:新規キャンバスを作成": false,
+      "daily-notes:今日のデイリーノートを開く": false,
+      "templates:テンプレートを挿入": false,
+      "command-palette:コマンドパレットを開く": false,
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "03aeab47bb00d5f0",
+  "lastOpenFiles": [
+    "無題のファイル.base",
+    "関数/指数関数.md",
+    "関数/三角関数.md",
+    "微分方程式/微分方程式の解の一意性.md",
+    "連続性/一様連続.md",
+    "微分積分学/積分/区間からユークリッド空間への連続写像は不定積分可能.md",
+    "線形代数/回転行列.md",
+    "幾何学/楕円.md",
+    "ニュートン力学/質点について/速度.md",
+    "ニュートン力学/作用反作用の法則.md",
+    "ニュートン力学/力.md",
+    "ニュートン力学/慣性の法則.md",
+    "ニュートン力学/質点について/自由粒子.md",
+    "ニュートン力学/質点について/等速直線運動.md",
+    "ニュートン力学/運動方程式.md",
+    "ニュートン力学/座標系/絶対慣性系.md",
+    "ニュートン力学/座標系/座標系.md",
+    "ニュートン力学/座標系/慣性系.md",
+    "ニュートン力学/座標系/ガリレイ変換.md",
+    "ニュートン力学/座標系/ガリレイの相対性原理.md",
+    "ケプラーの法則から運動方程式を予測する.md",
+    "微分積分学/微分積分学の基本定理.md",
+    "ニュートン力学/質点について/速さ.md",
+    "ニュートン力学/質点について/質点.md",
+    "ニュートン力学/質点について/加速度.md",
+    "微分積分学/微分/微分.md",
+    "ニュートン力学/質点について",
+    "線形代数",
+    "微分積分学/微分",
+    "微分積分学/積分",
+    "微分積分学",
+    "連続性",
+    "微分方程式",
+    "関数",
+    "⊂",
+    "ニュートン力学/無題のファイル.canvas"
+  ]
+}
